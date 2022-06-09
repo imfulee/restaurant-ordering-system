@@ -1,602 +1,901 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-    <script src="js/all.min.js"></script>
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/sweetalert2.all.js"></script>
-    <script src="js/sweetalert2.js"></script>
-    <link rel="stylesheet" href="css/sweetalert2.css">
-    <title>Zulite</title>
-  </head>
-  <style>
-    body {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      background-color:#ebdcc3;
-    }
-    a{
-      text-decoration:none;
-    }
-    .tableBtn{
-      color: #007048;
-      width: 100px;
-      border: 2px solid;
-      margin-bottom: 10px;
-    }
-    .tableBtn:focus{
-      background-color: #007048;
-      color: white;
-    }
-    .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
-      background-color: #007048;
-      color: white;
-    }
-    .nav-link{
-      color: #007048;
-      width: 100px;
-      margin-bottom: 5px;
-      border: 2px solid;
-    }
-    .projectBtn:focus{
-      background-color: #007048;
-      color: white;
-    }
-    .projectBtn{
-      color: #007048;
-      width: 180px;
-      margin-bottom: 10px;
-      border: 2px solid;
-    }
-    .row{
-      --bs-gutter-x: 0;
-    }
-    ul{
-      list-style:none;
-      padding-left: 0px;
-      margin-top: 5px;
-    }
-    li{
-      display: inline;
-    }
-    .fa-trash-alt{
-      margin-right: 2px;
-    }
-    .addBtn{
-      color: #007048;
-      width: 180px;
-      border: 2px solid #007048;
-      margin-bottom: 10px;
-      border: 2px solid;
-    }
-    .addBtn:focus{
-      background-color: #007048;
-      color: white;
-      border: 0;
-    }
-    .add-on{
-      background-color: #007048;
-      color: white;
-      border: 0;
-      border-radius: 5px;
-    }
-    body > div.swal2-container.swal2-center.swal2-backdrop-show > div{
-      background-color: #007048;
-      color: white;
-    }
-    #swal2-title{
-      color: white;
-    }
-  </style>
-  <body>
-    <div class="row">
-      <div class="col-4">
-        <a href="index.php" type="button" class="btn" title="跳回點餐系統" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 126px;"><i class="fas fa-share-square"></i></a>
-      </div>
-      <div class="col-4">
-        <h1 style="margin-top: 15px;text-align: center;color: #007048;">後臺操作</h1>
-      </div>
-      <div class="col-4">
-        <button type="button" class="btn" id="btnConfirm" title="確認" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 285px;"><i class="fas fa-check"></i></button>
-        <a href="report.php" type="button" class="btn" title="報表" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 5px;"><i class="fas fa-file-alt"></i></a>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <script src="js/all.min.js"></script>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/sweetalert2.all.js"></script>
+  <script src="js/sweetalert2.js"></script>
+  <link rel="stylesheet" href="css/sweetalert2.css">
+  <title>Zulite</title>
+</head>
+<style>
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    background-color: #ebdcc3;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .tableBtn {
+    color: #007048;
+    width: 100px;
+    border: 2px solid;
+    margin-bottom: 10px;
+  }
+
+  .tableBtn:focus {
+    background-color: #007048;
+    color: white;
+  }
+
+  .nav-pills .nav-link.active,
+  .nav-pills .show>.nav-link {
+    background-color: #007048;
+    color: white;
+  }
+
+  .nav-link {
+    color: #007048;
+    width: 100px;
+    margin-bottom: 5px;
+    border: 2px solid;
+  }
+
+  .projectBtn:focus {
+    background-color: #007048;
+    color: white;
+  }
+
+  .projectBtn {
+    color: #007048;
+    width: 180px;
+    margin-bottom: 10px;
+    border: 2px solid;
+  }
+
+  .row {
+    --bs-gutter-x: 0;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0px;
+    margin-top: 5px;
+  }
+
+  li {
+    display: inline;
+  }
+
+  .fa-trash-alt {
+    margin-right: 2px;
+  }
+
+  .addBtn {
+    color: #007048;
+    width: 180px;
+    border: 2px solid #007048;
+    margin-bottom: 10px;
+    border: 2px solid;
+  }
+
+  .addBtn:focus {
+    background-color: #007048;
+    color: white;
+    border: 0;
+  }
+
+  .add-on {
+    background-color: #007048;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+  }
+
+  body>div.swal2-container.swal2-center.swal2-backdrop-show>div {
+    background-color: #007048;
+    color: white;
+  }
+
+  #swal2-title {
+    color: white;
+  }
+</style>
+
+<body>
+  <div class="row">
+    <div class="col-4">
+      <a href="index.php" type="button" class="btn" title="跳回點餐系統" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 126px;"><i class="fas fa-share-square"></i></a>
+    </div>
+    <div class="col-4">
+      <h1 style="margin-top: 15px;text-align: center;color: #007048;">後臺操作</h1>
+    </div>
+    <div class="col-4">
+      <button type="button" class="btn" id="btnConfirm" title="確認" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 285px;"><i class="fas fa-check"></i></button>
+      <a href="report.php" type="button" class="btn" title="報表" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 5px;"><i class="fas fa-file-alt"></i></a>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-md-1"></div>
+    <div class="col-md-2" style="margin-top: 50px;">
+      <button type="button" class="btn" id="tableDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 25px;" onclick="delete_table()"><i class="fas fa-minus"></i></button>
+      <button type="button" class="btn" id="tableAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_table()"><i class="fas fa-plus"></i></button>
+      <button type="button" class="btn" id="tableDelete" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_table()"><i class="fas fa-pen"></i></button>
+      <div class="nav flex-column nav-pills me-3" id="table_add_list" role="tablist" aria-orientation="vertical" style="margin-left: 25px;">
       </div>
     </div>
-      
-      <div class="row" style="margin-top: 15px;">
-        <div class="col-md-1"></div>
-        <div class="col-md-1" style="margin-top: 50px;">
-          <button type="button" class="btn" id="tableDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 25px;"><i class="fas fa-minus"></i></button>
-          <button type="button" class="btn" id="tableAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;"><i class="fas fa-plus"></i></button>
-          <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-left: 25px;">
-            <button class="btn nav-link active" data-bs-toggle="pill">桌號1</button>
-            <button class="btn nav-link" data-bs-toggle="pill">桌號2</button>
-            <button class="btn nav-link" data-bs-toggle="pill">桌號3</button>
-            <button class="btn nav-link" data-bs-toggle="pill">桌號4</button>
-            <button class="btn nav-link" data-bs-toggle="pill">桌號5</button>
-          </div>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-5" style="margin-top: 50px;">
-          <button type="button" class="btn" id="navDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;"><i class="fas fa-minus"></i></button>
-          <button type="button" class="btn" id="navAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;"><i class="fas fa-plus"></i></button>
-          <button type="button" class="btn" id="navRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;"><i class="fas fa-pen"></i></button>
+    <div class="col-md-1"></div>
+    <div class="col-md-5" style="margin-top: 50px;">
+      <button type="button" class="btn" id="navDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;" onclick="delete_menu_type()"><i class="fas fa-minus"></i></button>
+      <button type="button" class="btn" id="navAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_menu_type()"><i class="fas fa-plus"></i></button>
+      <button type="button" class="btn" id="navRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_menu_type()"><i class="fas fa-pen"></i></button>
 
-          <button type="button" class="btn" id="projectDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 152px;"><i class="fas fa-minus"></i></button>
-          <button type="button" class="btn" id="projectAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;"><i class="fas fa-plus"></i></button>
-          <button type="button" class="btn" id="projectRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;"><i class="fas fa-pen"></i></button>
+      <button type="button" class="btn" id="projectDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 152px;" onclick="delete_menu_item()"><i class="fas fa-minus"></i></button>
+      <button type="button" class="btn" id="projectAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_menu_item()"><i class="fas fa-plus"></i></button>
+      <button type="button" class="btn" id="projectRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_menu_item()"><i class="fas fa-pen"></i></button>
 
-          <div class="d-flex align-items-start">
-            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-left: 25px;">
-              <button class="btn nav-link active" id="v-pills-friedNoodles-tab" data-bs-toggle="pill" data-bs-target="#v-pills-friedNoodles" type="button" role="tab" aria-controls="v-pills-friedNoodles" aria-selected="true">炒麵</button>
-              <button class="btn nav-link" id="v-pills-noodleSoup-tab" data-bs-toggle="pill" data-bs-target="#v-pills-noodleSoup" type="button" role="tab" aria-controls="v-pills-noodleSoup" aria-selected="false">湯麵</button>
-              <button class="btn nav-link" id="v-pills-rice-tab" data-bs-toggle="pill" data-bs-target="#v-pills-rice" type="button" role="tab" aria-controls="v-pills-rice" aria-selected="false">飯類</button>
-              <button class="btn nav-link" id="v-pills-soup-tab" data-bs-toggle="pill" data-bs-target="#v-pills-soup" type="button" role="tab" aria-controls="v-pills-soup" aria-selected="false">湯類</button>
-              <button class="btn nav-link" id="v-pills-sideDish-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sideDish" type="button" role="tab" aria-controls="v-pills-sideDish" aria-selected="false">小菜</button>
-            </div>
-            <div class="tab-content" id="v-pills-tabContent" style="margin-left: 78px;">
-              <div class="tab-pane fade show active" id="v-pills-friedNoodles" role="tabpanel" aria-labelledby="v-pills-friedNoodles-tab">
-                <button class="btn projectBtn">海鮮炒烏龍 $85</button>
-                <button class="btn projectBtn">海鮮炒米粉 $85</button>
-                <button class="btn projectBtn">海鮮炒粄條 $85</button>
-                <button class="btn projectBtn">海鮮炒麵 $85</button>
-                <button class="btn projectBtn">肉絲炒烏龍 $70</button>
-                <button class="btn projectBtn">肉絲炒米粉 $70</button>
-                <button class="btn projectBtn">肉絲炒粄條 $70</button>
-                <button class="btn projectBtn">肉絲炒麵 $70</button>
-                <button class="btn projectBtn">羊肉炒烏龍 $80</button>
-                <button class="btn projectBtn">羊肉炒米粉 $80</button>
-                <button class="btn projectBtn">羊肉炒粄條 $80</button>
-                <button class="btn projectBtn">羊肉炒麵 $80</button>
-                <button class="btn projectBtn">乾意麵 $45</button>
-                <button class="btn projectBtn">乾麵 $45</button>
-                <button class="btn projectBtn">乾米粉 $45</button>
-                <button class="btn projectBtn">乾粄條 $45</button>
-              </div>
-              <div class="tab-pane fade" id="v-pills-noodleSoup" role="tabpanel" aria-labelledby="v-pills-noodleSoup-tab">
-                <button class="btn projectBtn">海鮮湯烏龍 $85</button>
-                <button class="btn projectBtn">海鮮湯米粉 $85</button>
-                <button class="btn projectBtn">海鮮湯粄條 $85</button>
-                <button class="btn projectBtn">海鮮湯麵 $85</button>
-                <button class="btn projectBtn">肉絲湯烏龍 $70</button>
-                <button class="btn projectBtn">肉絲湯米粉 $70</button>
-                <button class="btn projectBtn">肉絲湯粄條 $70</button>
-                <button class="btn projectBtn">肉絲湯麵 $70</button>
-                <button class="btn projectBtn">豬腸冬粉 $75</button>
-                <button class="btn projectBtn">餛飩麵 $65</button>
-                <button class="btn projectBtn">鍋燒意麵 $90</button>
-                <button class="btn projectBtn">鍋燒烏龍 $90</button>
-                <button class="btn projectBtn">擔仔粄條 $50</button>
-                <button class="btn projectBtn">擔仔米粉 $50</button>
-                <button class="btn projectBtn">擔仔麵 $50</button>
-              </div>
-              <div class="tab-pane fade" id="v-pills-rice" role="tabpanel" aria-labelledby="v-pills-rice-tab">
-                <button class="btn projectBtn">白飯 $10</button>
-                <button class="btn projectBtn">肉燥飯(小) $35</button>
-                <button class="btn projectBtn">肉燥飯(大) $45</button>
-                <button class="btn projectBtn">肉絲蛋炒飯 $70</button>
-                <button class="btn projectBtn">蝦仁蛋炒飯 $70</button>
-                <button class="btn projectBtn">火腿蛋炒飯 $70</button>
-                <button class="btn projectBtn">蝦仁火腿蛋炒飯 $80</button>
-                <button class="btn projectBtn">蝦仁肉絲蛋炒飯 $90</button>
-                <button class="btn projectBtn">肉絲火腿蛋炒飯 $80</button>
-                <button class="btn projectBtn">羊肉炒飯 $80</button>
-                <button class="btn projectBtn">海鮮粥 $85</button>
-                <button class="btn projectBtn">無刺虱目魚粥 時價</button>
-              </div>
-              <div class="tab-pane fade" id="v-pills-soup" role="tabpanel" aria-labelledby="v-pills-soup-tab">
-                <button class="btn projectBtn">無刺虱目魚湯 時價</button>
-                <button class="btn projectBtn">肝連湯 $45</button>
-                <button class="btn projectBtn">豬肝湯 $45</button>
-                <button class="btn projectBtn">餛飩湯 $40</button>
-                <button class="btn projectBtn">貢丸湯 $30</button>
-                <button class="btn projectBtn">蛤蜊湯 $45</button>
-                <button class="btn projectBtn">蛋花湯 $35</button>
-              </div>
-              <div class="tab-pane fade" id="v-pills-sideDish" role="tabpanel" aria-labelledby="v-pills-sideDish-tab">
-                <button class="btn projectBtn">燙青菜 $35</button>
-                <button class="btn projectBtn">油豆腐 $25</button>
-                <button class="btn projectBtn">海帶 $25</button>
-                <button class="btn projectBtn">小豆干 $20</button>
-                <button class="btn projectBtn">滷蛋 $15</button>
-                <button class="btn projectBtn">皮蛋豆腐 $40</button>
-                <button class="btn projectBtn">涼拌時蔬 $50</button>
-                <button class="btn projectBtn">醃蜆仔 $40</button>
-                <button class="btn projectBtn">豬耳朵 $30</button>
-                <button class="btn projectBtn">肝連肉 $50</button>
-                <button class="btn projectBtn">粉腸 $50</button>
-                <button class="btn projectBtn">嘴邊肉 $50</button>
-                <button class="btn projectBtn">豬心 $50</button>
-                <button class="btn projectBtn">涼拌海蜇皮 $70</button>
-                <button class="btn projectBtn">涼拌小黃瓜 $40</button>
-              </div>
-            </div>
-          </div>
+      <div class="d-flex align-items-start">
+        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-left: 25px;">
         </div>
-        <div class="col-md-1"></div>
-        <center class="col-md-2" style="margin-top: 50px;">
-          <button type="button" class="btn" id="btnDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;"><i class="fas fa-minus"></i></button>
-          <button type="button" class="btn" id="btnAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;"><i class="fas fa-plus"></i></button>
-          <button type="button" class="btn" id="btnRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;"><i class="fas fa-pen"></i></button>
-          <button class="btn addBtn" id>加大</button>
-          <button class="btn addBtn">加辣</button>
-          <button class="btn addBtn">招待</button>
-        </center>
+        <div class="tab-content" id="v-pills-tabContent" style="margin-left: 78px;">
         </div>
-        <div class="col-md-1"></div>
       </div>
-  </body>
+    </div>
+    <div class="col-md-1"></div>
+    <center class="col-md-2" style="margin-top: 50px;">
+      <button type="button" class="btn" id="btnDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;" onclick="delete_remarks()"><i class="fas fa-minus"></i></button>
+      <button type="button" class="btn" id="btnAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_remarks()"><i class="fas fa-plus"></i></button>
+      <button type="button" class="btn" id="btnRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_remarks()"><i class="fas fa-pen"></i></button>
+      <div id="remarks_button_container">
+      </div>
+    </center>
+  </div>
+  <div class="col-md-1"></div>
+  </div>
+</body>
+
 </html>
 
 <script>
+  function confirmAlert() {
+    $.post(
+      "/API/table/set_table.php",
+      JSON.stringify(global_table_action),
+      function() {
+        global_table_action = [];
+      }
+    );
 
-  function confirmAlert(){
+    $.post(
+      "/API/remarks/set_remarks.php",
+      JSON.stringify(global_remarks_action),
+      function() {
+        global_remarks_action = [];
+      }
+    );
+
+    $.post(
+      "/API/types/set_types.php",
+      JSON.stringify(global_menu_type_action),
+      function() {
+        global_menu_type_action = [];
+      }
+    );
+
+    $.post(
+      "/API/menu/set_menu.php",
+      JSON.stringify(global_menu_item_action),
+      function() {
+        global_menu_item_action = [];
+      }
+    );
+
     Swal.fire({
       icon: 'success',
       title: '存取成功!!',
       showConfirmButton: false,
       timer: 1500,
       didOpen: () => {
-        document.querySelector(".swal2-success-circular-line-left").style.backgroundColor="#007048";
-        document.querySelector(".swal2-success-circular-line-right").style.backgroundColor="#007048";
-        document.querySelector(".swal2-success-fix").style.backgroundColor="#007048";
+        document.querySelector(".swal2-success-circular-line-left").style.backgroundColor = "#007048";
+        document.querySelector(".swal2-success-circular-line-right").style.backgroundColor = "#007048";
+        document.querySelector(".swal2-success-fix").style.backgroundColor = "#007048";
       }
     })
   }
-  document.getElementById("btnConfirm").addEventListener("click",function(){
+  document.getElementById("btnConfirm").addEventListener("click", function() {
     confirmAlert();
   });
 
-  function tableAlert(){
+  function _uuid() {
+    var d = Date.now();
+    if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+      d += performance.now(); //use high-precision timer if available
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  }
+
+  var global_table_names, global_menu_item, global_menu_type, global_remarks, global_selected_item, global_selected_remarks,
+    global_table_action = [],
+    global_menu_type_action = [],
+    global_menu_item_action = [],
+    global_remarks_action = [];
+  var global_menu;
+
+  function set_table_buttons() {
+    document.getElementById("table_add_list").innerHTML = '';
+    let current_table_count = 0;
+
+    function draw_table_buttons() {
+      let button, index = 0;
+      let table_add_list_div = document.getElementById("table_add_list");
+      for (const table of global_table_names) {
+        button = document.createElement("button");
+        if (index === 0) {
+          button.className = "btn nav-link tableBtn active";
+        } else {
+          button.className = "btn nav-link tableBtn";
+        }
+        button.setAttribute("data-bs-toggle", "pill");
+        button.innerText = `桌號${table["table_name"]}`;
+        button.id = `${table["uuid"]}`;
+        table_add_list_div.append(button);
+        index++;
+      }
+    }
+
+    if (!global_table_names) {
+      $.post("/API/table/get_table.php", function(data) {
+        data_json = JSON.parse(data);
+        global_table_names = data_json;
+      }).done(function() {
+        draw_table_buttons();
+      });
+    } else {
+      draw_table_buttons();
+    }
+
+  }
+
+  function add_table() {
     Swal.fire({
-    title: '確定刪除嗎?',
-    icon: 'warning',
-    showCancelButton: true,
-    background:'#106A8E;',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: '刪除',
-    cancelButtonText: '關閉'
+      title: '新增桌號',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: '新增',
+      cancelButtonText: '關閉',
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        let uuid = _uuid();
+        global_table_names.push({
+          "uuid": uuid,
+          "table_name": result.value
+        });
+        global_table_action.push({
+          "action": "add",
+          "uuid": uuid,
+          "table_name": result.value
+        })
+        set_table_buttons();
       }
-    })
+    });
   }
-  document.getElementById("tableDelete").addEventListener("click",function(){
-    tableAlert();
-  });
 
-
-  function btnAlert(){
+  function edit_table() {
+    let button_list = document.querySelectorAll(".btn.nav-link.tableBtn");
+    let inner_text = '',
+      id = '';
+    for (const button of button_list) {
+      if (button.className === "btn nav-link tableBtn active") {
+        inner_text = button.innerText.substring(2);
+        id = button.id;
+      }
+    }
     Swal.fire({
-    title: '確定刪除嗎?',
-    icon: 'warning',
-    showCancelButton: true,
-    background:'#106A8E;',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: '刪除',
-    cancelButtonText: '關閉'
+      title: '修改桌號',
+      input: 'text',
+      inputValue: inner_text,
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: '新增',
+      cancelButtonText: '關閉',
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-      }
-    })
-  }
-  document.getElementById("btnDelete").addEventListener("click",function(){
-    btnAlert();
-  });
-
-
-  function navAlert(){
-    Swal.fire({
-    title: '確定刪除嗎?',
-    icon: 'warning',
-    showCancelButton: true,
-    background:'#106A8E;',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: '刪除',
-    cancelButtonText: '關閉'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-      }
-    })
-  }
-  document.getElementById("navDelete").addEventListener("click",function(){
-    navAlert();
-  });
-
-
-  function navAlertadd(){
-    Swal.fire({
-    title: '新增項目',
-    input: 'text',
-    inputAttributes: {
-      autocapitalize: 'off'
-    },
-    showCancelButton: true,
-    confirmButtonText: '新增',
-    cancelButtonText: '關閉',
-    showLoaderOnConfirm: true,
-    preConfirm: (login) => {
-      return fetch(`//api.github.com/users/${login}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(response.statusText)
+        let temp = [];
+        let value = result.value;
+        for (let table of global_table_names) {
+          if (table["uuid"] === id) {
+            temp.push({
+              "uuid": id,
+              "table_name": result.value
+            });
+            global_table_action.push({
+              "action": "edit",
+              "uuid": id,
+              "table_name": result.value
+            })
+          } else {
+            temp.push(table);
           }
-          return response.json()
-        })
-        .catch(error => {
-          Swal.showValidationMessage(
-            `Request failed: ${error}`
-          )
-        })
-    },
-    allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: `${result.value.login}'s avatar`,
-          imageUrl: result.value.avatar_url
-        })
+        }
+        global_table_names = temp;
+        set_table_buttons();
       }
-    })
+    });
   }
 
-  document.getElementById("navAdd").addEventListener("click",function(){
-    navAlertadd();
-  });
-
-
-  function navAlertRevise(){
+  function delete_table() {
     Swal.fire({
-    title: '修改項目名稱',
-    input: 'text',
-    inputAttributes: {
-      autocapitalize: 'off'
-    },
-    showCancelButton: true,
-    confirmButtonText: '確定',
-    cancelButtonText: '關閉',
-    showLoaderOnConfirm: true,
-    preConfirm: (login) => {
-      return fetch(`//api.github.com/users/${login}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(response.statusText)
+      title: '確定刪除嗎?',
+      icon: 'warning',
+      showCancelButton: true,
+      background: '#106A8E;',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '刪除',
+      cancelButtonText: '關閉'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let button_list = document.querySelectorAll(".btn.nav-link.tableBtn");
+        let inner_text = '',
+          id = '';
+        for (const button of button_list) {
+          if (button.className === "btn nav-link tableBtn active") {
+            id = button.id;
+            inner_text = button.innerText;
           }
-          return response.json()
+        }
+        global_table_names = global_table_names.filter(function(value, index, arr) {
+          return value["uuid"] !== id;
+        });
+        global_table_action.push({
+          "action": "delete",
+          "uuid": id,
+          "table_name": inner_text
         })
-        .catch(error => {
-          Swal.showValidationMessage(
-            `Request failed: ${error}`
-          )
-        })
-    },
-    allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: `${result.value.login}'s avatar`,
-          imageUrl: result.value.avatar_url
-        })
+        set_table_buttons();
       }
     })
+
   }
 
-  document.getElementById("navRevise").addEventListener("click",function(){
-    navAlertRevise();
-  });
+  function set_menu_type_buttons() {
+    function draw_menu_type() {
+      let v_tabs_div = document.getElementById("v-pills-tab");
+      v_tabs_div.innerHTML = '';
+      let index_menu_type = 0;
+      for (const menu_type of global_menu_type) {
+        let button = document.createElement("button");
+        if (index_menu_type === 0) {
+          button.className = "btn nav-link menutypeBtn active";
+        } else {
+          button.className = "btn nav-link menutypeBtn";
+        }
+        button.id = `${menu_type["uuid"]}`;
+        button.setAttribute("data-bs-toggle", "pill");
+        button.setAttribute("data-bs-target", `#v-pills-${menu_type["type"]}`);
+        button.setAttribute("type", "button");
+        button.setAttribute("role", "tab");
+        button.setAttribute("aria-controls", `v-pills-${menu_type["type"]}`);
+        button.setAttribute("aria-selected", "true");
+        button.innerText = `${menu_type["type"]}`;
+        v_tabs_div.append(button);
+        index_menu_type++;
+      }
+    }
 
-  function projectAlert(){
+    if (!global_menu_type) {
+      $.post("/API/types/get_types.php", function(data) {
+        data_json = JSON.parse(data);
+        global_menu_type = data_json;
+        draw_menu_type();
+        set_menu_item_buttons();
+      });
+    } else {
+      draw_menu_type();
+      set_menu_item_buttons();
+    }
+  }
+
+  function add_menu_type() {
     Swal.fire({
-    title: '確定刪除嗎?',
-    icon: 'warning',
-    showCancelButton: true,
-    background:'#106A8E;',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: '刪除',
-    cancelButtonText: '關閉'
+      title: '新增項目',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: '新增',
+      cancelButtonText: '關閉',
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        const uuid = _uuid();
+        global_menu_type.push({
+          "uuid": uuid,
+          "type": result.value
+        });
+        global_menu_type_action.push({
+          "action": "add",
+          "uuid": uuid,
+          "type": result.value
+        })
+        set_menu_type_buttons();
       }
-    })
+    });
   }
-  document.getElementById("projectDelete").addEventListener("click",function(){
-    projectAlert();
-  });
 
-
-  function projectAlertadd(){
+  function delete_menu_type() {
     Swal.fire({
-    title: '新增項目',
-    input: 'text',
-    inputAttributes: {
-      autocapitalize: 'off'
-    },
-    showCancelButton: true,
-    confirmButtonText: '新增',
-    cancelButtonText: '關閉',
-    showLoaderOnConfirm: true,
-    preConfirm: (login) => {
-      return fetch(`//api.github.com/users/${login}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(response.statusText)
+      title: '確定刪除嗎?',
+      icon: 'warning',
+      showCancelButton: true,
+      background: '#106A8E;',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '刪除',
+      cancelButtonText: '關閉'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let button = document.querySelector(".btn.nav-link.active.menutypeBtn");
+        let temp = [];
+        for (const type of global_menu_type) {
+          if (type["uuid"] !== button.id) {
+            temp.push(type);
+          } else {
+            global_menu_type_action.push({
+              "action": "delete",
+              "uuid": button.id,
+              "type": button.innerText
+            });
+            let temp_items = [];
+            for (const item of global_menu_item) {
+              if (item["type_uuid"] !== type["uuid"]) {
+                temp_items.push(item);
+              } else {
+                global_menu_item_action.push({
+                  "action": "delete",
+                  "uuid": item["uuid"],
+                  "type": item["type"],
+                  "item_name": item["item_name"],
+                  "price": item["price"],
+                  "type_uuid": item["type_uuid"]
+                });
+              }
+            }
+            global_menu_item = temp_items;
           }
-          return response.json()
-        })
-        .catch(error => {
-          Swal.showValidationMessage(
-            `Request failed: ${error}`
-          )
-        })
-    },
-    allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: `${result.value.login}'s avatar`,
-          imageUrl: result.value.avatar_url
-        })
+        }
+        global_menu_type = temp;
+        set_menu_type_buttons();
       }
     })
   }
 
-  document.getElementById("projectAdd").addEventListener("click",function(){
-    projectAlertadd();
-  });
-
-
-  function projectAlertRevise(){
+  function edit_menu_type() {
+    let button = document.querySelector(".btn.nav-link.active.menutypeBtn");
     Swal.fire({
-    title: '修改項目名稱',
-    input: 'text',
-    inputAttributes: {
-      autocapitalize: 'off'
-    },
-    showCancelButton: true,
-    confirmButtonText: '確定',
-    cancelButtonText: '關閉',
-    showLoaderOnConfirm: true,
-    preConfirm: (login) => {
-      return fetch(`//api.github.com/users/${login}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(response.statusText)
-          }
-          return response.json()
-        })
-        .catch(error => {
-          Swal.showValidationMessage(
-            `Request failed: ${error}`
-          )
-        })
-    },
-    allowOutsideClick: () => !Swal.isLoading()
+      title: '修改項目',
+      input: 'text',
+      inputValue: button.innerText,
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: '修改',
+      cancelButtonText: '關閉',
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: `${result.value.login}'s avatar`,
-          imageUrl: result.value.avatar_url
-        })
+        let temp = [];
+        for (const type of global_menu_type) {
+          if (type["uuid"] !== button.id) {
+            temp.push(type);
+          } else {
+            temp.push({
+              "uuid": button.id,
+              "type": result.value
+            });
+            global_menu_type_action.push({
+              "action": "edit",
+              "uuid": button.id,
+              "type": result.value
+            });
+            let temp_items = [];
+            for (const item of global_menu_item) {
+              if (item["type_uuid"] !== type["uuid"]) {
+                temp_items.push(item);
+              } else {
+                temp_items.push({
+                  "uuid": item["uuid"],
+                  "type": result.value,
+                  "item_name": item["item_name"],
+                  "price": item["price"],
+                  "type_uuid": item["type_uuid"]
+                })
+                global_menu_item_action.push({
+                  "action": "edit",
+                  "uuid": item["uuid"],
+                  "type": result.value,
+                  "item_name": item["item_name"],
+                  "price": item["price"],
+                  "type_uuid": item["type_uuid"]
+                });
+              }
+            }
+            global_menu_item = temp_items;
+          }
+        }
+        global_menu_type = temp;
+        set_menu_type_buttons();
       }
     })
   }
 
-  document.getElementById("projectRevise").addEventListener("click",function(){
-    projectAlertRevise();
-  });
+  function set_menu_item_buttons() {
+    function draw_menu_buttons() {
+      let inner_text = document.querySelector(".btn.nav-link.menutypeBtn.active").innerText;
+      document.getElementById("v-pills-tabContent").innerHTML = '';
+      for (const menu_type of global_menu_type) {
+        let menu_type_items_div = document.createElement("div");
+        if (menu_type["type"] == inner_text) {
+          menu_type_items_div.className = "tab-pane fade show active";
+        } else {
+          menu_type_items_div.className = "tab-pane fade";
+        }
+        menu_type_items_div.id = `v-pills-${menu_type["type"]}`;
+        menu_type_items_div.setAttribute("role", "tabpanel");
+        // menu_type_items_div.setAttribute("aria-labelledby", `v-pills-${menu_type}-tab`);
+        document.getElementById("v-pills-tabContent").append(menu_type_items_div);
+      }
+
+      for (const menu_item of global_menu_item) {
+        let menu_item_button = document.createElement("button");
+        menu_item_button.className = "btn projectBtn";
+        menu_item_button.innerText = `${menu_item["item_name"]} $${menu_item["price"]}`;
+        menu_item_button.id = menu_item["uuid"];
+        menu_item_button.onclick = function() {
+          global_selected_item = {
+            "uuid": menu_item["uuid"],
+            "type": menu_item["type"],
+            "item_name": menu_item["item_name"],
+            "price": menu_item["price"],
+            "type_uuid": menu_item["type_uuid"],
+          };
+        }
+        document.getElementById(`v-pills-${menu_item["type"]}`).append(menu_item_button);
+      }
+    }
+
+    if (!global_menu_item) {
+      $.post("/API/menu/get_menu.php", function(data) {
+        data_json = JSON.parse(data);
+        global_menu_item = data_json;
+        draw_menu_buttons();
+      });
+    } else {
+      draw_menu_buttons();
+    }
+  }
 
 
 
-  function Alertadd(){
+  function add_menu_item() {
     Swal.fire({
-    title: '新增選項',
-    input: 'text',
-    inputAttributes: {
-      autocapitalize: 'off'
-    },
-    showCancelButton: true,
-    confirmButtonText: '新增',
-    cancelButtonText: '關閉',
-    showLoaderOnConfirm: true,
-    preConfirm: (login) => {
-      return fetch(`//api.github.com/users/${login}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(response.statusText)
-          }
-          return response.json()
+      title: '新增品項',
+      html: '<div style="display: grid; row-gap: 1em;">' +
+        '<div style="display: grid; grid-template-columns: 20% auto;">' +
+        '<label style="color: white; align-self: center;" for="swal-input1">名稱</label>' +
+        '<input id="swal-input1" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;">' +
+        '</div>' +
+        '<div style="display: grid; grid-template-columns: 20% auto;">' +
+        '<label style="color: white; align-self: center;" for="swal-input2">價錢</label>' +
+        '<input id="swal-input2" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;">' +
+        '</div>' +
+        '</div>',
+      showCancelButton: true,
+      confirmButtonText: '新增',
+      cancelButtonText: '關閉',
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      preConfirm: function() {
+        return new Promise(function(resolve) {
+          resolve([
+            $('#swal-input1').val(),
+            $('#swal-input2').val()
+          ])
         })
-        .catch(error => {
-          Swal.showValidationMessage(
-            `Request failed: ${error}`
-          )
-        })
-    },
-    allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
+      },
+    }).then(function(result) {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: `${result.value.login}'s avatar`,
-          imageUrl: result.value.avatar_url
+        let button = document.querySelector(".btn.nav-link.active.menutypeBtn");
+        let uuid = _uuid();
+        global_menu_item.push({
+          "uuid": uuid,
+          "type": button.innerText,
+          "item_name": result.value[0],
+          "price": result.value[1],
+          "type_uuid": button.id
+        });
+        global_menu_item_action.push({
+          "action": "add",
+          "uuid": uuid,
+          "type": button.innerText,
+          "item_name": result.value[0],
+          "price": result.value[1],
+          "type_uuid": button.id
         })
+        set_menu_item_buttons();
       }
     })
   }
 
-  document.getElementById("btnAdd").addEventListener("click",function(){
-    Alertadd();
-  });
+  function delete_menu_item() {
+    if (global_selected_item) {
+      Swal.fire({
+        title: '確定刪除嗎?',
+        icon: 'warning',
+        showCancelButton: true,
+        background: '#106A8E;',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '刪除',
+        cancelButtonText: '關閉'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let temp = [];
+          for (const item of global_menu_item) {
+            if (item["uuid"] !== global_selected_item["uuid"]) {
+              temp.push(item);
+            } else {
+              global_menu_item_action.push({
+                "action": "delete",
+                "uuid": global_selected_item["uuid"],
+                "type": global_selected_item["type"],
+                "item_name": result.value[0],
+                "price": result.value[1],
+                "type_uuid": global_selected_item["type_uuid"]
+              })
+            }
+          }
+          global_menu_item = temp;
+          global_selected_item = 0;
+          set_menu_item_buttons();
+        }
+      })
+    }
+  }
 
-  function btnAlertRevise(){
+  function edit_menu_item() {
+    if (global_selected_item) {
+      const item_name_selected = global_selected_item["item_name"];
+      const price_selected = global_selected_item["price"];
+      Swal.fire({
+        title: '修改品項',
+        html: '<div style="display: grid; row-gap: 1em;">' +
+          '<div style="display: grid; grid-template-columns: 20% auto;">' +
+          '<label style="color: white; align-self: center;" for="swal-input1">名稱</label>' +
+          `<input id="swal-input1" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;" value="${item_name_selected}">` +
+          '</div>' +
+          '<div style="display: grid; grid-template-columns: 20% auto;">' +
+          '<label style="color: white; align-self: center;" for="swal-input2">價錢</label>' +
+          `<input id="swal-input2" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;" value="${price_selected}">` +
+          '</div>' +
+          '</div>',
+        showCancelButton: true,
+        confirmButtonText: '修改',
+        cancelButtonText: '關閉',
+        showLoaderOnConfirm: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        preConfirm: function() {
+          return new Promise(function(resolve) {
+            resolve([
+              $('#swal-input1').val(),
+              $('#swal-input2').val()
+            ])
+          })
+        },
+      }).then(function(result) {
+        if (result.isConfirmed) {
+          let temp = [];
+          for (const item of global_menu_item) {
+            if (item["uuid"] !== global_selected_item["uuid"]) {
+              temp.push(item);
+            } else {
+              temp.push({
+                "uuid": item["uuid"],
+                "type": item["type"],
+                "item_name": result.value[0],
+                "price": result.value[1],
+                "type_uuid": item["type_uuid"],
+              });
+              global_menu_item_action.push({
+                "action": "edit",
+                "uuid": item["uuid"],
+                "type": item["type"],
+                "item_name": result.value[0],
+                "price": result.value[1],
+                "type_uuid": item["type_uuid"],
+              })
+            }
+          }
+          global_menu_item = temp;
+          global_selected_item = 0;
+          set_menu_item_buttons();
+        }
+      })
+    }
+  }
+
+  function set_remarks_button() {
+    function draw_remarks_button() {
+      let container = document.getElementById("remarks_button_container");
+      container.innerHTML = '';
+      for (const item of global_remarks) {
+        let button = document.createElement("button");
+        button.className = "btn addBtn tableBtn";
+        button.innerText = item["remark"];
+        button.id = item["uuid"]
+        button.onclick = function() {
+          global_selected_remarks = this.id;
+        }
+        container.append(button);
+      }
+    }
+    if (!global_remarks) {
+      $.post("/API/remarks/get_remarks.php", function(data) {
+        let json_data = JSON.parse(data);
+        global_remarks = json_data;
+        draw_remarks_button();
+      });
+    } else {
+      draw_remarks_button();
+    }
+
+  }
+
+  function add_remarks() {
     Swal.fire({
-    title: '修改項目名稱',
-    input: 'text',
-    inputAttributes: {
-      autocapitalize: 'off'
-    },
-    showCancelButton: true,
-    confirmButtonText: '確定',
-    cancelButtonText: '關閉',
-    showLoaderOnConfirm: true,
-    preConfirm: (login) => {
-      return fetch(`//api.github.com/users/${login}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(response.statusText)
-          }
-          return response.json()
-        })
-        .catch(error => {
-          Swal.showValidationMessage(
-            `Request failed: ${error}`
-          )
-        })
-    },
-    allowOutsideClick: () => !Swal.isLoading()
+      title: '新增項目',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: '新增',
+      cancelButtonText: '關閉',
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: `${result.value.login}'s avatar`,
-          imageUrl: result.value.avatar_url
-        })
+        let uuid = _uuid();
+        global_remarks.push({
+          "uuid": uuid,
+          "remark": result.value
+        });
+        global_remarks_action.push({
+          "action": "add",
+          "uuid": uuid,
+          "remark": result.value
+        });
+        set_remarks_button();
       }
-    })
+    });
   }
 
-  document.getElementById("btnRevise").addEventListener("click",function(){
-    btnAlertRevise();
-  });
+  function delete_remarks() {
+    if (global_selected_remarks) {
+      Swal.fire({
+        title: '確定刪除嗎?',
+        icon: 'warning',
+        showCancelButton: true,
+        background: '#106A8E;',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '刪除',
+        cancelButtonText: '關閉'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let temp = [];
+          for (const item of global_remarks) {
+            if (item["uuid"] !== global_selected_remarks) {
+              temp.push(item);
+            } else {
+              global_remarks_action.push({
+                "action": "delete",
+                "uuid": item["uuid"],
+                "remark": item["remark"]
+              });
+            }
+          }
+          global_remarks = temp;
+          global_selected_remarks = 0;
+          set_remarks_button();
+        }
+      })
+    }
+  }
 
-  </script>
+  function edit_remarks() {
+    if (global_selected_remarks) {
+      Swal.fire({
+        title: '修改項目',
+        input: 'text',
+        inputValue: document.getElementById(global_selected_remarks).innerText,
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: '修改',
+        cancelButtonText: '關閉',
+        showLoaderOnConfirm: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let temp = [];
+          for (const item of global_remarks) {
+            if (item["uuid"] !== global_selected_remarks) {
+              temp.push(item);
+            } else {
+              temp.push({
+                "uuid": item["uuid"],
+                "remark": result.value
+              });
+              global_remarks_action.push({
+                "action": "edit",
+                "uuid": item["uuid"],
+                "remark": result.value
+              });
+            }
+          }
+          global_remarks = temp;
+          global_selected_remarks = 0;
+          set_remarks_button();
+        }
+      })
+    }
+  }
+
+  window.onload = function() {
+    set_table_buttons();
+    set_menu_type_buttons();
+    set_remarks_button();
+  }
+</script>

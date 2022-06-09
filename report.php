@@ -38,6 +38,16 @@
       color: #fff;
       border-color: #373b3e;
     }
+    body > div.swal2-container.swal2-center.swal2-backdrop-show > div{
+      background-color: #007048;
+      color: white;
+    }
+    #swal2-title{
+      color: white;
+    }
+    #swal2-html-container{
+      color: #e0e0e0;
+    }
   </style>
   <body>
     <div class="row">
