@@ -323,7 +323,7 @@
         autocapitalize: 'off'
       },
       showCancelButton: true,
-      confirmButtonText: '新增',
+      confirmButtonText: '修改',
       cancelButtonText: '關閉',
       showLoaderOnConfirm: true,
       confirmButtonColor: '#3085d6',
