@@ -116,14 +116,14 @@
   }
 
   body {
-    font-size:2rem;
+    font-size: 2rem;
   }
 
-  a.btn{
+  a.btn {
     font-size: 1.5rem;
   }
 
-  button.btn{
+  button.btn {
     font-size: 1.5rem;
   }
 
@@ -133,6 +133,22 @@
 
   input.swal2-input {
     font-size: 2rem;
+  }
+
+  div#row_main {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    column-gap: 1rem;
+  }
+
+  div#table_add_list {
+    display: grid;
+    height: 60vh;
+    overflow-y: scroll;
+  }
+
+  div#row_controls_tables {
+    align-self: center;
   }
 </style>
 
@@ -150,16 +166,16 @@
     </div>
   </div>
 
-  <div class="row" style="margin-top: 15px;">
-    <div class="col-md-1"></div>
-    <div class="col-md-2" style="margin-top: 50px;">
-      <button type="button" class="btn" id="tableDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 0;" onclick="delete_table()"><i class="fas fa-minus"></i></button>
-      <button type="button" class="btn" id="tableAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_table()"><i class="fas fa-plus"></i></button>
-      <button type="button" class="btn" id="tableDelete" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_table()"><i class="fas fa-pen"></i></button>
-      <div class="nav flex-column nav-pills me-3" id="table_add_list" role="tablist" aria-orientation="vertical" style="height: 60vh;"></div>
+  <div class="row" id="row_main" style="margin-top: 50px;">
+    <div id="col_table">
+      <div id="row_controls_tables">
+        <button type="button" class="btn" id="tableDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 0;" onclick="delete_table()"><i class="fas fa-minus"></i></button>
+        <button type="button" class="btn" id="tableAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_table()"><i class="fas fa-plus"></i></button>
+        <button type="button" class="btn" id="tableDelete" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_table()"><i class="fas fa-pen"></i></button>
+      </div>
+      <div class="nav nav-pills" id="table_add_list" role="tablist"></div>
     </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-4" style="margin-top: 50px;">
+    <div>
       <button type="button" class="btn" id="navDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;" onclick="delete_menu_type()"><i class="fas fa-minus"></i></button>
       <button type="button" class="btn" id="navAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_menu_type()"><i class="fas fa-plus"></i></button>
       <button type="button" class="btn" id="navRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_menu_type()"><i class="fas fa-pen"></i></button>
@@ -168,23 +184,18 @@
       <button type="button" class="btn" id="projectAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_menu_item()"><i class="fas fa-plus"></i></button>
       <button type="button" class="btn" id="projectRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_menu_item()"><i class="fas fa-pen"></i></button>
 
-      <div class="d-flex align-items-start">
-        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-left: 40px;">
-        </div>
-        <div class="tab-content" id="v-pills-tabContent" style="margin-left: 5rem; display: grid; justify-items: center;overflow-y: scroll;height: 60vh;">
-        </div>
+      <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-left: 40px;">
+      </div>
+      <div class="tab-content" id="v-pills-tabContent" style="margin-left: 5rem; display: grid; justify-items: center;overflow-y: scroll;height: 60vh;">
       </div>
     </div>
-    <div class="col-md-1"></div>
-    <center class="col-md-2" style="margin-top: 50px;">
+    <div>
       <button type="button" class="btn" id="btnDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;" onclick="delete_remarks()"><i class="fas fa-minus"></i></button>
       <button type="button" class="btn" id="btnAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_remarks()"><i class="fas fa-plus"></i></button>
       <button type="button" class="btn" id="btnRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_remarks()"><i class="fas fa-pen"></i></button>
       <div id="remarks_button_container" style="height: 60vh;overflow-y: scroll;">
       </div>
-    </center>
-  </div>
-  <div class="col-md-1"></div>
+    </div>
   </div>
 </body>
 
