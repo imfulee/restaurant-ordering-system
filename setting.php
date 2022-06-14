@@ -114,6 +114,26 @@
   #swal2-title {
     color: white;
   }
+
+  body {
+    font-size:2rem;
+  }
+
+  a.btn{
+    font-size: 1.5rem;
+  }
+
+  button.btn{
+    font-size: 1.5rem;
+  }
+
+  h2#swal2-title {
+    font-size: 4em;
+  }
+
+  input.swal2-input {
+    font-size: 2rem;
+  }
 </style>
 
 <body>
@@ -133,26 +153,25 @@
   <div class="row" style="margin-top: 15px;">
     <div class="col-md-1"></div>
     <div class="col-md-2" style="margin-top: 50px;">
-      <button type="button" class="btn" id="tableDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 25px;" onclick="delete_table()"><i class="fas fa-minus"></i></button>
+      <button type="button" class="btn" id="tableDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 0;" onclick="delete_table()"><i class="fas fa-minus"></i></button>
       <button type="button" class="btn" id="tableAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_table()"><i class="fas fa-plus"></i></button>
       <button type="button" class="btn" id="tableDelete" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_table()"><i class="fas fa-pen"></i></button>
-      <div class="nav flex-column nav-pills me-3" id="table_add_list" role="tablist" aria-orientation="vertical" style="margin-left: 25px;">
-      </div>
+      <div class="nav flex-column nav-pills me-3" id="table_add_list" role="tablist" aria-orientation="vertical" style="height: 60vh;"></div>
     </div>
     <div class="col-md-1"></div>
-    <div class="col-md-5" style="margin-top: 50px;">
+    <div class="col-md-4" style="margin-top: 50px;">
       <button type="button" class="btn" id="navDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;" onclick="delete_menu_type()"><i class="fas fa-minus"></i></button>
       <button type="button" class="btn" id="navAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_menu_type()"><i class="fas fa-plus"></i></button>
       <button type="button" class="btn" id="navRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_menu_type()"><i class="fas fa-pen"></i></button>
 
-      <button type="button" class="btn" id="projectDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 152px;" onclick="delete_menu_item()"><i class="fas fa-minus"></i></button>
+      <button type="button" class="btn" id="projectDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 34px;" onclick="delete_menu_item()"><i class="fas fa-minus"></i></button>
       <button type="button" class="btn" id="projectAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_menu_item()"><i class="fas fa-plus"></i></button>
       <button type="button" class="btn" id="projectRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_menu_item()"><i class="fas fa-pen"></i></button>
 
       <div class="d-flex align-items-start">
-        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-left: 25px;">
+        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-left: 40px;">
         </div>
-        <div class="tab-content" id="v-pills-tabContent" style="margin-left: 78px;">
+        <div class="tab-content" id="v-pills-tabContent" style="margin-left: 5rem; display: grid; justify-items: center;overflow-y: scroll;height: 60vh;">
         </div>
       </div>
     </div>
@@ -161,7 +180,7 @@
       <button type="button" class="btn" id="btnDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;" onclick="delete_remarks()"><i class="fas fa-minus"></i></button>
       <button type="button" class="btn" id="btnAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_remarks()"><i class="fas fa-plus"></i></button>
       <button type="button" class="btn" id="btnRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_remarks()"><i class="fas fa-pen"></i></button>
-      <div id="remarks_button_container">
+      <div id="remarks_button_container" style="height: 60vh;overflow-y: scroll;">
       </div>
     </center>
   </div>
@@ -585,7 +604,14 @@
       for (const menu_item of global_menu_item) {
         let menu_item_button = document.createElement("button");
         menu_item_button.className = "btn projectBtn";
-        menu_item_button.innerText = `${menu_item["item_name"]} $${menu_item["price"]}`;
+        let menu_item_button_itemname = document.createElement("div");
+        menu_item_button_itemname.innerText = menu_item["item_name"];
+        menu_item_button_itemname.className = "projectBtnDetails";
+        let menu_item_button_price = document.createElement("div");
+        menu_item_button_price.innerText = `$${menu_item["price"]}`;
+        menu_item_button_price.className = "projectBtnDetails";
+        menu_item_button.append(menu_item_button_itemname);
+        menu_item_button.append(menu_item_button_price);
         menu_item_button.id = menu_item["uuid"];
         menu_item_button.onclick = function() {
           global_selected_item = {
@@ -618,11 +644,11 @@
       title: '新增品項',
       html: '<div style="display: grid; row-gap: 1em;">' +
         '<div style="display: grid; grid-template-columns: 20% auto;">' +
-        '<label style="color: white; align-self: center;" for="swal-input1">名稱</label>' +
+        '<label style="color: white; align-self: center; font-size: 2rem;" for="swal-input1">名稱</label>' +
         '<input id="swal-input1" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;">' +
         '</div>' +
         '<div style="display: grid; grid-template-columns: 20% auto;">' +
-        '<label style="color: white; align-self: center;" for="swal-input2">價錢</label>' +
+        '<label style="color: white; align-self: center; font-size: 2rem;" for="swal-input2">價錢</label>' +
         '<input id="swal-input2" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;">' +
         '</div>' +
         '</div>',
@@ -708,11 +734,11 @@
         title: '修改品項',
         html: '<div style="display: grid; row-gap: 1em;">' +
           '<div style="display: grid; grid-template-columns: 20% auto;">' +
-          '<label style="color: white; align-self: center;" for="swal-input1">名稱</label>' +
+          '<label style="color: white; align-self: center; font-size: 2rem;" for="swal-input1">名稱</label>' +
           `<input id="swal-input1" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;" value="${item_name_selected}">` +
           '</div>' +
           '<div style="display: grid; grid-template-columns: 20% auto;">' +
-          '<label style="color: white; align-self: center;" for="swal-input2">價錢</label>' +
+          '<label style="color: white; align-self: center; font-size: 2rem;" for="swal-input2">價錢</label>' +
           `<input id="swal-input2" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;" value="${price_selected}">` +
           '</div>' +
           '</div>',
