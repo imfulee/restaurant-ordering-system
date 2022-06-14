@@ -54,53 +54,77 @@
   #swal2-html-container {
     color: #e0e0e0;
   }
+
+  body {
+    font-size: 2rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  a.btn {
+    font-size: 3rem;
+  }
+
+  button.btn {
+    font-size: 3rem;
+  }
+
+  @media (orientation: landscape) {
+    div#row_title {
+      display: grid;
+      grid-template-columns: 20% auto 20%;
+
+    }
+  }
+
+  @media (orientation: portrait) {
+    div#row_title {
+      display: grid;
+      grid-template-columns: 30% auto 30%;
+
+    }
+  }
 </style>
 
 <body>
-  <div class="row">
-    <div class="col-4">
-      <a href="index.php" type="button" class="btn" title="跳回點餐系統" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 126px;"><i class="fas fa-share-square"></i></a>
-      <a href="setting.php" type="button" class="btn" title="修改" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 10px;"><i class="fas fa-pen"></i></a>
+  <div class="row" id="row_title" style="margin-top: 25px;">
+    <div id="left_buttons">
+      <a href="index.php" type="button" class="btn" title="跳回點餐系統" style="background-color: #007048;color: white"><i class="fas fa-share-square"></i></a>
+      <a href="setting.php" type="button" class="btn" title="修改" style="background-color: #007048;color: white"><i class="fas fa-pen"></i></a>
     </div>
-    <div class="col-4">
-      <h1 style="margin-top: 15px;text-align: center;color: #007048;">報表</h1>
-    </div>
-    <div class="col-4">
-      <button type="button" class="btn btn-primary" title="下載" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 285px;" onclick="update_modal_date()">
+    <h1 id="h1_pagename" style="text-align: center;color: #007048;">報表</h1>
+    <div id="right_buttons">
+      <button type="button" class="btn btn-primary" title="下載" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #007048;color: white; float: right;" onclick="update_modal_date()">
         <i class="fas fa-download"></i>
       </button>
     </div>
   </div>
 
   <div class="row" style="margin-top: 15px;color: #007048;">
-    <div class="col-md-1"></div>
-    <div class="col-md-11">
-      <div style="display: inline-block;">
-        選擇日期：
-        <form method="post" id="download_report" action="/API/order/get_order_file.php">
-          <input id="input_start_date" name="start_date" type="date" style="border-radius: 5px;border-color: aliceblue;" onchange="set_time()">
-          ---
-          <input id="input_end_date" name="end_date" type="date" style="border-radius: 5px;border-color: aliceblue;" onchange="set_time()">
-          <input type="hidden">
-        </form>
-      </div>
+    <div id="row_time">
+      選擇日期：
+      <form method="post" id="download_report" action="/API/order/get_order_file.php">
+        <input id="input_start_date" name="start_date" type="date" style="border-radius: 5px;border-color: aliceblue;" onchange="set_time()" value="<?php echo date('Y-m-d'); ?>">
+        ---
+        <input id="input_end_date" name="end_date" type="date" style="border-radius: 5px;border-color: aliceblue;" onchange="set_time()" value="<?php echo date('Y-m-d'); ?>">
+        <input type="hidden">
+      </form>
     </div>
   </div>
+  </div>
   <div class="row" style="margin-top: 15px;">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-      <table class="table table-dark" id="table_orders" border="1" style="margin-left: 15px; margin-bottom: 15px;margin-top: 15px;border-color: white;">
-        <thead>
-          <tr>
-            <th width="40%">日期</th>
-            <th width="60%">金額</th>
-          </tr>
-        </thead>
-        <tbody id="tbody_order">
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-2"></div>
+    <table class="table table-dark" id="table_orders" border="1" style="margin-bottom: 15px;margin-top: 15px;border-color: white;">
+      <thead>
+        <tr>
+          <th width="30%">日期</th>
+          <th width="70%">金額</th>
+        </tr>
+      </thead>
+      <tbody id="tbody_order">
+      </tbody>
+    </table>
   </div>
 </body>
 
