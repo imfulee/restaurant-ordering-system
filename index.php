@@ -64,8 +64,8 @@
   .projectBtn {
     color: #007048;
     width: 180px;
-    margin-bottom: 10px;
     border: 2px solid;
+    display: grid;
   }
 
   .row {
@@ -183,56 +183,176 @@
     border-radius: 5px;
   }
 
-  #order_list_background {
-    border: 2px solid #007048;
-    min-height: 70vh;
-    height: auto;
-    border-radius: 24px;
-    border-radius: 15px;
-    box-shadow: 2px 2px 8px 2px #579982;
-    padding: 30px 30px;
-    background-color: #007048;
-    display: grid;
-    grid-template-rows: 90% 10%;
+  .btn-xxl {
+    font-size: 2rem;
+  }
+  .btn-xl {
+    font-size: 3rem;
+  }
+
+  div#v-pills-tab>button {
+    justify-self: center;
+    width: auto;
+  }
+
+  h2#swal2-title {
+    font-size: 3rem;
+  }
+
+  div#order_list {
+    font-size: 2rem;
+    overflow-y: scroll;
+  }
+
+  button.add-on {
+    font-size: 4rem;
+  }
+
+  input#appendedPrependedInput1 {
+    font-size: 4rem;
+  }
+
+  span.remark_span {
+    font-size: 3rem;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  @media (orientation: landscape) {
+    div#order_list_background {
+      color: white;
+      border: 2px solid #007048;
+      height: 70vh;
+      border-radius: 15px;
+      box-shadow: 2px 2px 8px 2px #579982;
+      padding: 30px 30px;
+      background-color: #007048;
+      display: grid;
+      grid-template-rows: 80% 20%;
+      justify-self: end;
+    }
+
+    div#row_title {
+      display: grid;
+      grid-template-columns: 30% auto 30%;
+      margin-top: 17px;
+      margin-bottom: 1rem;
+    }
+    div#col_ordering_controls {
+      display: grid;
+      grid-template-columns: 20% auto;
+      margin-bottom: 1rem;
+    }
+
+    div#row_main {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns:1.5fr 1fr;
+    }
+
+    div#v-pills-tab {
+      display: grid;
+      row-gap: 1em;
+      max-height: 70vh;
+      overflow-y: scroll;
+    }
+
+    div.tab-pane.fade.active.show {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1em;
+      overflow-y: scroll;
+      max-height: 60vh;
+    }
+  }
+
+  @media (orientation: portrait) {
+    div#order_list_background {
+      color: white;
+      border: 2px solid #007048;
+      height: 36vh;
+      border-radius: 15px;
+      box-shadow: 2px 2px 8px 2px #579982;
+      padding: 30px 30px;
+      background-color: #007048;
+      display: grid;
+      grid-template-rows: 80% 20%;
+      justify-self: end;
+    }
+
+    div#row_title {
+      display: grid;
+      grid-template-columns: 30% auto 30%;
+      margin-top: 15px;
+      margin-bottom: 1rem;
+    }
+
+    div#row_main {
+      overflow-y: hidden;
+    }
+
+    div#col_ordering_controls {
+      display: grid;
+      grid-template-columns: 20% auto;
+      margin-bottom: 1rem;
+    }
+
+    div#v-pills-tab {
+      display: grid;
+      row-gap: 1em;
+      max-height: 45vh;
+      overflow-y: scroll;
+    }
+
+    div.tab-pane.fade.active.show {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1em;
+      overflow-y: scroll;
+      height: 40vh;
+    }
   }
 </style>
 
 <body>
-  <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
-      <h1 style="margin-top: 15px;text-align: center;color: #007048;">點餐系統</h1>
-    </div>
-    <div class="col-4">
-      <a href="setting.php" type="button" class="btn" title="修改" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 282px;"><i class="fas fa-pen"></i></a>
-      <a href="report.php" type="button" class="btn" title="報表" style="background-color: #007048;color: white;margin-top: 25px;margin-left: 5px;"><i class="fas fa-file-alt"></i></a>
+  <div class="row" id="row_title">
+    <div id="btn_control_left"></div>
+    <h1 style="text-align: center;color: #007048; font-size: 4rem;">點餐系統</h1>
+    <div id="btn_control_right">
+      <a href="report.php" type="button" class="btn btn-xl" title="報表" style="background-color: #007048;color: white; float: right; margin-right: 2rem;"><i class="fas fa-file-alt"></i></a>
+      <a href="setting.php" type="button" class="btn btn-xl" title="修改" style="background-color: #007048;color: white; float: right; margin-right: 1rem;"><i class="fas fa-pen"></i></a>
     </div>
   </div>
 
-  <div class="row" style="margin-top: 15px;">
-    <div class="col-md-1"></div>
-    <div class="col-md-1" style="margin-top: 50px;">
+  <div class="row" id="row_main">
+    <div id="col_ordering_controls">
       <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       </div>
-    </div>
-    <div class="col-md-10" style="margin-top: 50px;">
-      <div class="d-flex align-items-start">
-        <div class="nav flex-column nav-pills me-3" id="v-pills-tab-type" role="tablist" aria-orientation="vertical">
+      <div>
+        <div class="nav nav-pills me-3" id="v-pills-tab-type" role="tablist">
         </div>
         <div class="tab-content" id="v-pills-tabContent">
         </div>
-        <div class="col-md-6" style="color: white;">
-          <div id="order_list_background">
-            <div id="order_list">
-            </div>
-            <div style="align-self: end;">
-              <label style="font-size: 30px;">總金額:$<span id="totalAmount">0</span></label>
-              <button type="button" class="btn" id="checkOut" style="float: right;background-color: #ebdcc3;color: #007048;margin-top: 4px;" onclick="confirmAlert()"><i class="fas fa-arrow-right"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-1"></div>
       </div>
+    </div>
+    <div id="order_list_background">
+      <div id="order_list">
+      </div>
+      <div style="align-self: end;">
+        <label style="font-size: 40px;">總金額:$<span id="totalAmount">0</span></label>
+        <button type="button" class="btn btn-xxl" id="checkOut" style="float: right;background-color: #ebdcc3;color: #007048;margin-top: 4px;" onclick="confirmAlert()"><i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
 </body>
 
 </html>
@@ -279,12 +399,12 @@
     let is_all_unit_price_set = true;
     for (const order_item of global_order[table_button_selected_id()]) {
       let is_gifted = false;
-      for(const remark of order_item["item_remarks"]){
-        if(remark["remark"] === "招待"){
+      for (const remark of order_item["item_remarks"]) {
+        if (remark["remark"] === "招待") {
           is_gifted = true;
         }
       }
-      if (order_item["unit_price"] === 0 && !is_gifted) {
+      if (!(order_item["unit_price"] !== 0 || is_gifted || order_item["edited"])) {
         alert(`${order_item["item_name"]}的價格還沒有設定`);
         is_all_unit_price_set = false;
       }
@@ -292,16 +412,16 @@
 
     if (is_all_unit_price_set) {
       const payment = parseInt(document.getElementById("totalAmount").innerText);
-      $.post("/API/order/set_order.php", 
-      JSON.stringify({
-        "uuid": _uuid(),
-        "payment": payment,
-        "order_list": global_order[table_button_selected_id()]
-      }),
-      function(){
-        global_order[table_button_selected_id()] = [];
-        set_order();
-      }); 
+      $.post("/API/order/set_order.php",
+        JSON.stringify({
+          "uuid": _uuid(),
+          "payment": payment,
+          "order_list": global_order[table_button_selected_id()]
+        }),
+        function() {
+          global_order[table_button_selected_id()] = [];
+          set_order();
+        });
       Swal.fire({
         icon: 'success',
         title: '結帳成功',
@@ -336,7 +456,7 @@
       checkbox_input.id = remark["uuid"];
       checkbox_input.name = "variety";
       let span_in_label = document.createElement("span");
-      span_in_label.className = "round button";
+      span_in_label.className = "round button remark_span";
       span_in_label.innerText = remark["remark"];
 
       outer_label.append(checkbox_input);
@@ -348,7 +468,7 @@
       html: `
           <div style="margin-bottom: 10px;">
             <button class="add-on" onclick="chgNum(1,'del')"><i class="fas fa-minus"></i></button>
-            <input class="span3 text-center" id="appendedPrependedInput1" disabled="disabled" type="text" value="1" style="width: 122px;border-radius: 5px;background-color: #ffffff;color: #106a8e;"/>
+            <input class="span3 text-center" id="appendedPrependedInput1" type="number" value="1" style="width: 122px;border-radius: 5px;background-color: #ffffff;color: #106a8e;"/>
             <button class="add-on" onclick="chgNum(1,'add')"><i class="fas fa-plus"></i></button>
           </div>` + outer_div.outerHTML,
       showCancelButton: true,
@@ -385,6 +505,7 @@
           "unit_price": parseInt(global_selected_item["price"]),
           "order_price": parseInt(global_selected_item["price"]) * parseInt(result.value[0]) * multiplier,
           "price_editable": global_selected_item["price_editable"],
+          "edited": false,
         });
         set_order();
       }
@@ -414,7 +535,7 @@
             }
           }
           let span_in_label = document.createElement("span");
-          span_in_label.className = "round button";
+          span_in_label.className = "round button remark_span";
           span_in_label.innerText = remark["remark"];
 
           outer_label.append(checkbox_input);
@@ -423,15 +544,16 @@
         }
 
         let div_edit_price = document.createElement("div");
-        div_edit_price.style="display: grid; width: 100%";
-        if(order["price_editable"]){
+        div_edit_price.style = "display: grid; width: 100%; font-size: 2rem;";
+        if (order["price_editable"]) {
           let label_edit_price = document.createElement("label");
           label_edit_price.innerText = "單價";
           let input_edit_price = document.createElement("input");
           input_edit_price.className = "swal2-input";
-          input_edit_price.style = "width: 80%; justify-self: center;";
-          input_edit_price.type = "text";
+          input_edit_price.style = "width: 80%; justify-self: center; margin: 0";
+          input_edit_price.type = "number";
           input_edit_price.id = "input-0-price";
+          input_edit_price.setAttribute("min", "0")
           input_edit_price.setAttribute("value", order["unit_price"]);
           input_edit_price.setAttribute("autocapitalize", "none");
           div_edit_price.append(label_edit_price);
@@ -459,7 +581,7 @@
               }
             }
             let new_unit_price = order["unit_price"];
-            if(document.getElementById("input-0-price")){
+            if (document.getElementById("input-0-price")) {
               new_unit_price = parseInt(document.getElementById("input-0-price").value);
             }
             return new Promise(function(resolve) {
@@ -491,6 +613,7 @@
                   "unit_price": parseInt(result.value[3]),
                   "order_price": parseInt(result.value[3]) * parseInt(result.value[0]) * multiplier,
                   "price_editable": order["price_editable"],
+                  "edited": true,
                 });
               } else {
                 tmp_order_list.push(ind_order);
@@ -556,9 +679,9 @@
       for (const menu_type of global_menu_type) {
         let button = document.createElement("button");
         if (index_menu_type === 0) {
-          button.className = "btn nav-link menutypeBtn active";
+          button.className = "btn nav-link menutypeBtn active btn-xxl";
         } else {
-          button.className = "btn nav-link menutypeBtn";
+          button.className = "btn nav-link menutypeBtn btn-xxl";
         }
         button.id = menu_type["uuid"];
         button.setAttribute("data-bs-toggle", "pill");
@@ -568,6 +691,9 @@
         button.setAttribute("aria-controls", `v-pills-${menu_type["type"]}`);
         button.setAttribute("aria-selected", "true");
         button.innerText = `${menu_type["type"]}`;
+        button.onclick = function() {
+
+        }
         v_tabs_div.append(button);
         index_menu_type++;
       }
@@ -605,12 +731,19 @@
 
       for (const menu_item of global_menu_item) {
         let menu_item_button = document.createElement("button");
-        menu_item_button.className = "btn projectBtn";
-        menu_item_button.innerText = `${menu_item["item_name"]} $${menu_item["price"]}`;
+        menu_item_button.className = "btn projectBtn btn-xxl";
+        let menu_item_button_itemname = document.createElement("div");
+        menu_item_button_itemname.innerText = menu_item["item_name"];
+        menu_item_button_itemname.className = "projectBtnDetails";
+        let menu_item_button_price = document.createElement("div");
+        menu_item_button_price.innerText = `$${menu_item["price"]}`;
+        menu_item_button_price.className = "projectBtnDetails";
+        menu_item_button.append(menu_item_button_itemname);
+        menu_item_button.append(menu_item_button_price);
         menu_item_button.id = menu_item["uuid"];
         menu_item_button.onclick = function() {
           let price_editable = false;
-          if(parseInt(menu_item["price"]) === 0){
+          if (parseInt(menu_item["price"]) === 0) {
             price_editable = true;
           }
           global_selected_item = {
@@ -619,7 +752,8 @@
             "item_name": menu_item["item_name"],
             "price": menu_item["price"],
             "type_uuid": menu_item["type_uuid"],
-            "price_editable": price_editable
+            "price_editable": price_editable,
+            "edited": false,
           };
           Alertadd();
         }
@@ -647,9 +781,9 @@
         for (const [index, table] of json_data.entries()) {
           let button = document.createElement("button");
           if (index === 0) {
-            button.className = "btn nav-link tableBtn active"
+            button.className = "btn nav-link tableBtn active btn-xxl"
           } else {
-            button.className = "btn nav-link tableBtn";
+            button.className = "btn nav-link tableBtn btn-xxl";
           }
           button.setAttribute("data-bs-toggle", "pill");
           button.innerText = `桌號${table["table_name"]}`;
