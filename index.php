@@ -186,6 +186,7 @@
   .btn-xxl {
     font-size: 2rem;
   }
+
   .btn-xl {
     font-size: 3rem;
   }
@@ -248,6 +249,7 @@
       margin-top: 17px;
       margin-bottom: 1rem;
     }
+
     div#col_ordering_controls {
       display: grid;
       grid-template-columns: 20% auto;
@@ -257,7 +259,7 @@
     div#row_main {
       margin-top: 1rem;
       display: grid;
-      grid-template-columns:1.5fr 1fr;
+      grid-template-columns: 1.5fr 1fr;
     }
 
     div#v-pills-tab {
@@ -440,6 +442,7 @@
   var global_remarks = [];
   var global_selected_item;
   var global_table, global_menu_item, global_menu_type, global_order = {};
+  var global_input_bool_alertadd = false;
 
   function table_button_selected_id() {
     return document.querySelector(".btn.nav-link.tableBtn.active").id;
@@ -463,6 +466,24 @@
       outer_label.append(span_in_label);
       outer_div.append(outer_label);
     }
+
+    let div_edit_price = document.createElement("div");
+    div_edit_price.style = "display: grid; width: 100%; font-size: 2rem;";
+    if (global_selected_item["price_editable"]) {
+      let label_edit_price = document.createElement("label");
+      label_edit_price.innerText = "單價";
+      let input_edit_price = document.createElement("input");
+      input_edit_price.className = "swal2-input";
+      input_edit_price.style = "width: 80%; justify-self: center; margin: 0";
+      input_edit_price.type = "number";
+      input_edit_price.id = "input-1-price";
+      input_edit_price.setAttribute("min", "0")
+      input_edit_price.setAttribute("value", global_selected_item["price"]);
+      div_edit_price.append(label_edit_price);
+      div_edit_price.append(input_edit_price);
+      console.log(input_edit_price);
+    }
+    global_input_bool_alertadd = false;
     Swal.fire({
       title: global_selected_item["item_name"],
       html: `
@@ -470,7 +491,7 @@
             <button class="add-on" onclick="chgNum(1,'del')"><i class="fas fa-minus"></i></button>
             <input class="span3 text-center" id="appendedPrependedInput1" type="number" value="1" style="width: 122px;border-radius: 5px;background-color: #ffffff;color: #106a8e;"/>
             <button class="add-on" onclick="chgNum(1,'add')"><i class="fas fa-plus"></i></button>
-          </div>` + outer_div.outerHTML,
+          </div>` + outer_div.outerHTML + div_edit_price.outerHTML,
       showCancelButton: true,
       confirmButtonText: '確定',
       cancelButtonText: '取消',
@@ -481,14 +502,28 @@
             remark_list.push(remark);
           }
         }
+        let edited_price = 0,
+          edited_price_alertadd = false;
+        console.log(document.getElementById("input-1-price"), global_input_bool_alertadd);
+        if (document.getElementById("input-1-price")) {
+          edited_price_alertadd = true;
+          edited_price = parseInt(document.getElementById("input-1-price").value);
+        }
+        console.log({
+          edited_price_alertadd,
+          edited_price
+        });
         return new Promise(function(resolve) {
           resolve([
             $('#appendedPrependedInput1').val(),
-            remark_list
+            remark_list,
+            edited_price_alertadd,
+            edited_price
           ])
         })
       },
     }).then((result) => {
+      console.log("will come here");
       let multiplier = 1;
       if (result.isConfirmed) {
         const table_button_selected = table_button_selected_id();
@@ -497,15 +532,16 @@
             multiplier = 0;
           }
         }
+        const price_set_to_order = result.value[2] ? result.value[3] : parseInt(global_selected_item["price"]);
         global_order[`${table_button_selected}`].push({
           "uuid": _uuid(),
           "item_name": global_selected_item["item_name"],
           "quantity": parseInt(result.value[0]),
           "item_remarks": result.value[1],
-          "unit_price": parseInt(global_selected_item["price"]),
-          "order_price": parseInt(global_selected_item["price"]) * parseInt(result.value[0]) * multiplier,
+          "unit_price": price_set_to_order,
+          "order_price": price_set_to_order * parseInt(result.value[0]) * multiplier,
           "price_editable": global_selected_item["price_editable"],
-          "edited": false,
+          "edited": result.value[2],
         });
         set_order();
       }
@@ -753,7 +789,7 @@
             "price": menu_item["price"],
             "type_uuid": menu_item["type_uuid"],
             "price_editable": price_editable,
-            "edited": false,
+            "edited": menu_item["edited"],
           };
           Alertadd();
         }
