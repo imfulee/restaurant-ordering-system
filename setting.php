@@ -207,6 +207,10 @@
       grid-template-columns: 1fr 2fr 1fr;
     }
 
+    div#col_tables{
+      margin-top: .5rem;
+    }
+
     div#table_add_list {
       display: flex;
       justify-content: space-between;
