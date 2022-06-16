@@ -248,6 +248,8 @@
       grid-template-columns: 30% auto 30%;
       margin-top: 17px;
       margin-bottom: 1rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
     }
 
     div#col_ordering_controls {
@@ -297,6 +299,8 @@
       grid-template-columns: 30% auto 30%;
       margin-top: 15px;
       margin-bottom: 1rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
     }
 
     div#row_main {
@@ -328,10 +332,12 @@
 
 <body>
   <div class="row" id="row_title">
-    <div id="btn_control_left"></div>
+    <div id="btn_control_left">
+      <a href="checkout.php" type="button" class="btn btn-xl" title="結帳" style="background-color: #007048;color: white;"><i class="fas fa-hand-holding-usd"></i></a>
+    </div>
     <h1 style="text-align: center;color: #007048; font-size: 4rem;">點餐系統</h1>
     <div id="btn_control_right">
-      <a href="report.php" type="button" class="btn btn-xl" title="報表" style="background-color: #007048;color: white; float: right; margin-right: 2rem;"><i class="fas fa-file-alt"></i></a>
+      <a href="report.php" type="button" class="btn btn-xl" title="報表" style="background-color: #007048;color: white; float: right;"><i class="fas fa-file-alt"></i></a>
       <a href="setting.php" type="button" class="btn btn-xl" title="修改" style="background-color: #007048;color: white; float: right; margin-right: 1rem;"><i class="fas fa-pen"></i></a>
     </div>
   </div>
@@ -417,6 +423,7 @@
       $.post("/API/order/set_order.php",
         JSON.stringify({
           "uuid": _uuid(),
+          "table_uuid": table_button_selected_id(),
           "payment": payment,
           "order_list": global_order[table_button_selected_id()]
         }),
@@ -426,7 +433,7 @@
         });
       Swal.fire({
         icon: 'success',
-        title: '結帳成功',
+        title: '出單成功',
         html: `本次結帳金額為$${payment}`,
         showConfirmButton: false,
         timer: 1500,
@@ -481,7 +488,6 @@
       input_edit_price.setAttribute("value", global_selected_item["price"]);
       div_edit_price.append(label_edit_price);
       div_edit_price.append(input_edit_price);
-      console.log(input_edit_price);
     }
     global_input_bool_alertadd = false;
     Swal.fire({
@@ -504,15 +510,10 @@
         }
         let edited_price = 0,
           edited_price_alertadd = false;
-        console.log(document.getElementById("input-1-price"), global_input_bool_alertadd);
         if (document.getElementById("input-1-price")) {
           edited_price_alertadd = true;
           edited_price = parseInt(document.getElementById("input-1-price").value);
         }
-        console.log({
-          edited_price_alertadd,
-          edited_price
-        });
         return new Promise(function(resolve) {
           resolve([
             $('#appendedPrependedInput1').val(),
@@ -523,7 +524,6 @@
         })
       },
     }).then((result) => {
-      console.log("will come here");
       let multiplier = 1;
       if (result.isConfirmed) {
         const table_button_selected = table_button_selected_id();

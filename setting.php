@@ -141,8 +141,8 @@
     }
 
     div#row_title {
-      margin-left: 2rem;
-      margin-right: 2rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
       display: grid;
       grid-template-columns: 1fr 2fr 1fr;
     }
@@ -158,6 +158,14 @@
     div#remarks_button_container {
       height: 30vh;
       overflow-y: scroll;
+    }
+
+    div#col_tables,
+    div#col_control,
+    div#col_remark {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      margin-top: 1rem;
     }
   }
 
@@ -208,7 +216,8 @@
 <body>
   <div class="row" id="row_title" style="margin-top: 15px;">
     <div class="btn_left_corner">
-      <a href="index.php" type="button" class="btn" title="跳回點餐系統" style="background-color: #007048;color: white; font-size: 3rem;"><i class="fas fa-share-square"></i></a>
+      <a href="index.php" type="button" class="btn btn-xl" title="跳回點餐系統" style="background-color: #007048;color: white; font-size: 3rem;"><i class="fas fa-share-square"></i></a>
+      <a href="checkout.php" type="button" class="btn btn-xl" title="結帳" style="background-color: #007048;color: white; font-size: 3rem;"><i class="fas fa-hand-holding-usd"></i></a>
     </div>
     <h1 style="text-align: center;color: #007048; font-size: 4rem;">後臺操作</h1>
     <div class="btn_right_corner">
@@ -242,7 +251,7 @@
         </div>
       </div>
     </div>
-    <div>
+    <div id="col_remark">
       <button type="button" class="btn" id="btnDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;" onclick="delete_remarks()"><i class="fas fa-minus"></i></button>
       <button type="button" class="btn" id="btnAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_remarks()"><i class="fas fa-plus"></i></button>
       <button type="button" class="btn" id="btnRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_remarks()"><i class="fas fa-pen"></i></button>

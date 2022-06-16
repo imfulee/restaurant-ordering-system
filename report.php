@@ -96,6 +96,7 @@
     </div>
     <h1 id="h1_pagename" style="text-align: center;color: #007048;">報表</h1>
     <div id="right_buttons">
+    <a href="checkout.php" type="button" class="btn btn-xl" title="結帳" style="background-color: #007048;color: white; float: right;margin-left: 7px;"><i class="fas fa-hand-holding-usd"></i></a>
       <button type="button" class="btn btn-primary" title="下載" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #007048;color: white; float: right;" onclick="update_modal_date()">
         <i class="fas fa-download"></i>
       </button>
