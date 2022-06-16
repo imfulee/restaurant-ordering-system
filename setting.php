@@ -135,6 +135,26 @@
     font-size: 2rem;
   }
 
+  div#row_title a,
+  div#row_title button {
+    background-color: #007048;
+    color: white;
+    font-size: 3rem;
+    width: 5rem;
+  }
+
+  div#btn_control_left {
+    display: flex;
+    justify-content: start;
+    gap: 1rem;
+  }
+
+  div#btn_control_right {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+  }
+
   @media (orientation: portrait) {
     div#table_add_list>button {
       width: auto;
@@ -147,17 +167,8 @@
       grid-template-columns: 1fr 2fr 1fr;
     }
 
-    div#col_control > button {
+    div#col_control>button {
       margin-top: 0;
-    }
-
-    div#v-pills-tabContent{
-      height: 30vh;
-    }
-
-    div#remarks_button_container {
-      height: 30vh;
-      overflow-y: scroll;
     }
 
     div#col_tables,
@@ -166,6 +177,13 @@
       margin-left: 1rem;
       margin-right: 1rem;
       margin-top: 1rem;
+    }
+
+    div#v-pills-tabContent {
+      margin-left: 4rem;
+      display: grid;
+      justify-items: center;
+      overflow-y: scroll;
     }
   }
 
@@ -202,7 +220,7 @@
       width: 100%;
     }
 
-    div#v-pills-tabContent{
+    div#v-pills-tabContent {
       height: 50vh;
     }
 
@@ -215,14 +233,14 @@
 
 <body>
   <div class="row" id="row_title" style="margin-top: 15px;">
-    <div class="btn_left_corner">
-      <a href="index.php" type="button" class="btn btn-xl" title="跳回點餐系統" style="background-color: #007048;color: white; font-size: 3rem;"><i class="fas fa-share-square"></i></a>
-      <a href="checkout.php" type="button" class="btn btn-xl" title="結帳" style="background-color: #007048;color: white; font-size: 3rem;"><i class="fas fa-hand-holding-usd"></i></a>
+    <div id="btn_control_left">
+      <a href="index.php" type="button" class="btn btn-xl" title="跳回點餐系統"><i class="fas fa-share-square"></i></a>
+      <a href="checkout.php" type="button" class="btn btn-xl" title="結帳"><i class="fas fa-hand-holding-usd"></i></a>
     </div>
     <h1 style="text-align: center;color: #007048; font-size: 4rem;">後臺操作</h1>
-    <div class="btn_right_corner">
-      <button type="button" class="btn" id="btnConfirm" title="確認" style="background-color: #007048;color: white; margin-left: 5px;float: right;font-size: 3rem;"><i class="fas fa-check"></i></button>
-      <a href="report.php" type="button" class="btn" title="報表" style="background-color: #007048;color: white;float: right;font-size: 3rem;"><i class="fas fa-file-alt"></i></a>
+    <div id="btn_control_right">
+      <button type="button" class="btn" id="btnConfirm" title="確認"><i class="fas fa-check"></i></button>
+      <a href="report.php" type="button" class="btn" title="報表"><i class="fas fa-file-alt"></i></a>
     </div>
   </div>
 
@@ -247,7 +265,7 @@
       <div class="d-flex align-items-start">
         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-left: 40px;">
         </div>
-        <div class="tab-content" id="v-pills-tabContent" style="margin-left: 5rem; display: grid; justify-items: center;overflow-y: scroll;">
+        <div class="tab-content" id="v-pills-tabContent">
         </div>
       </div>
     </div>

@@ -71,6 +71,32 @@
     font-size: 3rem;
   }
 
+  div#row_title a,
+  div#row_title button {
+    width: 5rem;
+    background-color: #007048;
+    color: white;
+    float: right;
+  }
+
+  div#btn_control_left {
+    display: flex;
+    justify-content: start;
+    gap: 1rem;
+  }
+
+  div#btn_control_right {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+  }
+
+  div#row_title a, 
+  div#row_title button {
+    background-color: #007048;
+    color: white
+  }
+
   @media (orientation: landscape) {
     div#row_title {
       display: grid;
@@ -89,15 +115,15 @@
 </style>
 
 <body>
-  <div class="row" id="row_title" style="margin-top: 25px;">
-    <div id="left_buttons">
-      <a href="index.php" type="button" class="btn" title="跳回點餐系統" style="background-color: #007048;color: white"><i class="fas fa-share-square"></i></a>
-      <a href="setting.php" type="button" class="btn" title="修改" style="background-color: #007048;color: white"><i class="fas fa-pen"></i></a>
+  <div class="row" id="row_title" style="margin-top: 15px;">
+    <div id="btn_control_left">
+      <a href="index.php" type="button" class="btn" title="跳回點餐系統"><i class="fas fa-share-square"></i></a>
+      <a href="setting.php" type="button" class="btn" title="修改"><i class="fas fa-pen"></i></a>
     </div>
     <h1 id="h1_pagename" style="text-align: center;color: #007048;">報表</h1>
-    <div id="right_buttons">
-    <a href="checkout.php" type="button" class="btn btn-xl" title="結帳" style="background-color: #007048;color: white; float: right;margin-left: 7px;"><i class="fas fa-hand-holding-usd"></i></a>
-      <button type="button" class="btn btn-primary" title="下載" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #007048;color: white; float: right;" onclick="update_modal_date()">
+    <div id="btn_control_right">
+      <a href="checkout.php" type="button" class="btn btn-xl" title="結帳"><i class="fas fa-hand-holding-usd"></i></a>
+      <button type="button" class="btn btn-primary" title="下載" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="update_modal_date()">
         <i class="fas fa-download"></i>
       </button>
     </div>

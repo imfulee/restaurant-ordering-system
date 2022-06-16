@@ -59,15 +59,31 @@
     }
 
     body {
-        margin-left: 2rem;
-        margin-right: 2rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     div#row_title {
         display: grid;
         grid-template-columns: 30% auto 30%;
-        margin-top: 17px;
+        margin-top: 15px;
         margin-bottom: 1rem;
+    }
+
+    div#row_title h1 {
+        font-size: 4rem;
+        text-align: center;
+        color: #007048;
+    }
+
+    div#btn_control_right{
+        display: flex;
+        justify-content: end;
+        gap: 1rem;
+    }
+
+    a#link_report {
+        width: 5rem;
     }
 
     div#row_main {
@@ -118,10 +134,10 @@
         <div id="btn_control_left">
             <a href="index.php" type="button" class="btn" title="跳回點餐系統" id="link_index"><i class="fas fa-share-square"></i></a>
         </div>
-        <h1 style="text-align: center;color: #007048;">結帳系統</h1>
+        <h1>結帳系統</h1>
         <div id="btn_control_right">
-            <a href="report.php" type="button" class="btn" title="報表" id="link_report" style="float: right; margin-right: 2rem;"><i class="fas fa-file-alt"></i></a>
-            <a href="setting.php" type="button" class="btn" title="修改" id="link_setting" style="float: right; margin-right: 1rem;"><i class="fas fa-pen"></i></a>
+            <a href="report.php" type="button" class="btn" title="報表" id="link_report"><i class="fas fa-file-alt"></i></a>
+            <a href="setting.php" type="button" class="btn" title="修改" id="link_setting"><i class="fas fa-pen"></i></a>
         </div>
     </div>
     <select id="select_table" class="form-select form-select-lg" aria-label="桌號選擇"></select>
@@ -185,7 +201,6 @@
     }
 
     function checkout_submit() {
-        console.log(global_json_data);
         if (global_json_data && global_json_data["checkout_items"].length !== 0) {
             $.post(
                 "/API/checkout/set_checkout.php",

@@ -228,6 +228,27 @@
     -moz-appearance: textfield;
   }
 
+  div#row_title>*>a {
+    background-color: #007048;
+    color: white;
+  }
+
+  div#row_title h1 {
+    text-align: center;
+    color: #007048;
+    font-size: 4rem;
+  }
+
+  a#link_report {
+    width: 5rem;
+  }
+
+  div#btn_control_right {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+  }
+
   @media (orientation: landscape) {
     div#order_list_background {
       color: white;
@@ -249,6 +270,10 @@
       margin-bottom: 1rem;
       margin-left: 1rem;
       margin-right: 1rem;
+    }
+
+    div#row_title a {
+      width: 5rem;
     }
 
     div#col_ordering_controls {
@@ -332,12 +357,12 @@
 <body>
   <div class="row" id="row_title">
     <div id="btn_control_left">
-      <a href="checkout.php" type="button" class="btn btn-xl" title="結帳" style="background-color: #007048;color: white;"><i class="fas fa-hand-holding-usd"></i></a>
+      <a href="checkout.php" type="button" class="btn btn-xl" title="結帳"><i class="fas fa-hand-holding-usd"></i></a>
     </div>
-    <h1 style="text-align: center;color: #007048; font-size: 4rem;">點餐系統</h1>
+    <h1>點餐系統</h1>
     <div id="btn_control_right">
-      <a href="report.php" type="button" class="btn btn-xl" title="報表" style="background-color: #007048;color: white; float: right;"><i class="fas fa-file-alt"></i></a>
-      <a href="setting.php" type="button" class="btn btn-xl" title="修改" style="background-color: #007048;color: white; float: right; margin-right: 1rem;"><i class="fas fa-pen"></i></a>
+      <a href="report.php" type="button" class="btn btn-xl" id="link_report" title="報表"><i class="fas fa-file-alt"></i></a>
+      <a href="setting.php" type="button" class="btn btn-xl" title="修改"><i class="fas fa-pen"></i></a>
     </div>
   </div>
 
@@ -380,26 +405,17 @@
   function chgNum(ndid, opr) {
     var input = document.getElementById(`appendedPrependedInput${ndid}`);
     var index = parseInt(input.value);
-
-    // var price = $('.price').html().substring(1);
     if (opr == 'del') {
 
       if (index == 1) {
-        // alert("不能減了!");
         return;
       }
       index = index - 1;
 
     } else if (opr == 'add') {
-      // if(index == 99){
-      //   // alert('不能加了!');
-      //   return ;
-      // }
       index = index + 1;
     }
     input.value = index;
-    // $('.nums ').html(index);
-    // $('.total').html(index*price+'元')
   }
 
   function confirmAlert() {
@@ -484,6 +500,9 @@
       input_edit_price.id = "input-1-price";
       input_edit_price.setAttribute("min", "0")
       input_edit_price.setAttribute("value", global_selected_item["price"]);
+      input_edit_price.oninput = function() {
+        this.value = this.value >= 0 ? this.value : 0;
+      }
       div_edit_price.append(label_edit_price);
       div_edit_price.append(input_edit_price);
     }
@@ -725,9 +744,9 @@
         button.setAttribute("aria-controls", `v-pills-${menu_type["type"]}`);
         button.setAttribute("aria-selected", "true");
         button.innerText = `${menu_type["type"]}`;
-        button.onclick = function() {
-
-        }
+        // button.onclick = function() {
+        //   console.log("this");
+        // }
         v_tabs_div.append(button);
         index_menu_type++;
       }
@@ -759,6 +778,13 @@
         }
         menu_type_items_div.id = `v-pills-${menu_type["type"]}`;
         menu_type_items_div.setAttribute("role", "tabpanel");
+        // set the height of the item
+        if (screen.availHeight > screen.availWidth) {
+          menu_type_items_div.style = "height: 40vh";
+        } else {
+          menu_type_items_div.style = "height: 60vh";
+
+        }
         // menu_type_items_div.setAttribute("aria-labelledby", `v-pills-${menu_type}-tab`);
         document.getElementById("v-pills-tabContent").append(menu_type_items_div);
       }
