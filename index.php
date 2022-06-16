@@ -128,7 +128,11 @@
     display: none;
   }
 
-  #checkboxes input:checked+.button {
+  input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+  }
+
+  #checkboxes input[type="checkbox"]:checked+.button {
     background: #ebdcc3;
     color: #007048;
   }
@@ -140,11 +144,6 @@
     border: 2px solid #ebdcc3;
     color: #ebdcc3;
     cursor: pointer;
-  }
-
-  #checkboxes .button:hover {
-    background: #ebdcc3;
-    color: #007048;
   }
 
   #checkboxes .round {
@@ -464,7 +463,6 @@
       checkbox_input.type = "checkbox";
       checkbox_input.value = remark["remark"];
       checkbox_input.id = remark["uuid"];
-      checkbox_input.name = "variety";
       let span_in_label = document.createElement("span");
       span_in_label.className = "round button remark_span";
       span_in_label.innerText = remark["remark"];
