@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-  <script src="js/all.min.js"></script>
+  <script src="static/fontawesome-free-6.1.1-web/js/all.min.js"></script>
   <script src="js/jquery-3.6.0.min.js"></script>
   <script src="js/sweetalert2.all.js"></script>
   <script src="js/sweetalert2.js"></script>
