@@ -249,6 +249,10 @@
     gap: 1rem;
   }
 
+  button.menutypeBtn {
+    width: auto;
+  }
+
   @media (orientation: landscape) {
     div#order_list_background {
       color: white;
@@ -300,7 +304,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1em;
       overflow-y: scroll;
-      max-height: 60vh;
+      max-height: 50vh;
     }
   }
 
@@ -333,23 +337,28 @@
 
     div#col_ordering_controls {
       display: grid;
-      grid-template-columns: 20% auto;
+      grid-template-columns: 30% 70%;
       margin-bottom: 1rem;
     }
 
     div#v-pills-tab {
-      display: grid;
-      row-gap: 1em;
-      max-height: 45vh;
-      overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      /* max-height: 45vh; */
+      /* overflow-y: scroll; */
     }
 
     div.tab-pane.fade.active.show {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1em;
       overflow-y: scroll;
-      height: 40vh;
+      /* height: 40vh; */
+    }
+
+    div.tab-pane.fade.active.show button {
+      width: auto;
     }
   }
 </style>
@@ -743,7 +752,27 @@
         button.setAttribute("role", "tab");
         button.setAttribute("aria-controls", `v-pills-${menu_type["type"]}`);
         button.setAttribute("aria-selected", "true");
-        button.innerText = `${menu_type["type"]}`;
+        let insert_icon = '';
+        switch (menu_type["type"]) {
+          case "湯類":
+            insert_icon = `<i class="fa-solid fa-whiskey-glass" style="margin-right: 5px;"></i>`;
+            break;
+          case "湯麵":
+            insert_icon = `<i class="fa-solid fa-bowl-food" style="margin-right: 5px;"></i>`;
+            break;
+          case "飯類":
+            insert_icon = `<i class="fa-solid fa-bowl-rice" style="margin-right: 5px;"></i>`;
+            break;
+          case "小菜":
+            insert_icon = `<i class="fa-solid fa-pepper-hot" style="margin-right: 5px;"></i>`;
+            break;
+          case "炒麵":
+            insert_icon = `<i class="fa-solid fa-bacon" style="margin-right: 5px;"></i>`;
+            break;
+          default:
+            insert_icon = `<i class="fa-solid fa-bowl-spoon" style="margin-right: 5px;"></i>`
+        }
+        button.innerHTML = `${insert_icon}${menu_type["type"]}`;
         // button.onclick = function() {
         //   console.log("this");
         // }
@@ -778,13 +807,6 @@
         }
         menu_type_items_div.id = `v-pills-${menu_type["type"]}`;
         menu_type_items_div.setAttribute("role", "tabpanel");
-        // set the height of the item
-        if (screen.availHeight > screen.availWidth) {
-          menu_type_items_div.style = "height: 40vh";
-        } else {
-          menu_type_items_div.style = "height: 60vh";
-
-        }
         // menu_type_items_div.setAttribute("aria-labelledby", `v-pills-${menu_type}-tab`);
         document.getElementById("v-pills-tabContent").append(menu_type_items_div);
       }
@@ -846,7 +868,7 @@
             button.className = "btn nav-link tableBtn btn-xxl";
           }
           button.setAttribute("data-bs-toggle", "pill");
-          button.innerText = `桌號${table["table_name"]}`;
+          button.innerHTML = `<i class="fa-solid fa-utensils" style="margin-right: 5px;"></i>桌號${table["table_name"]}`;
           button.id = table["uuid"];
           button.addEventListener("click", set_order);
           document.getElementById("v-pills-tab").append(button);

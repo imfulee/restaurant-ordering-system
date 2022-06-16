@@ -155,6 +155,10 @@
     gap: 1rem;
   }
 
+  div#v-pills-tab button {
+    width: 10rem;
+  }
+
   @media (orientation: portrait) {
     div#table_add_list>button {
       width: auto;
@@ -371,7 +375,7 @@
           button.className = "btn nav-link tableBtn";
         }
         button.setAttribute("data-bs-toggle", "pill");
-        button.innerText = `桌號${table["table_name"]}`;
+        button.innerHTML = `<i class="fa-solid fa-utensils" style="margin-right: 5px;"></i>桌號${table["table_name"]}`;
         button.id = `${table["uuid"]}`;
         table_add_list_div.append(button);
         index++;
@@ -523,7 +527,27 @@
         button.setAttribute("role", "tab");
         button.setAttribute("aria-controls", `v-pills-${menu_type["type"]}`);
         button.setAttribute("aria-selected", "true");
-        button.innerText = `${menu_type["type"]}`;
+        let insert_icon = '';
+        switch (menu_type["type"]) {
+          case "湯類":
+            insert_icon = `<i class="fa-solid fa-whiskey-glass" style="margin-right: 5px;"></i>`;
+            break;
+          case "湯麵":
+            insert_icon = `<i class="fa-solid fa-bowl-food" style="margin-right: 5px;"></i>`;
+            break;
+          case "飯類":
+            insert_icon = `<i class="fa-solid fa-bowl-rice" style="margin-right: 5px;"></i>`;
+            break;
+          case "小菜":
+            insert_icon = `<i class="fa-solid fa-pepper-hot" style="margin-right: 5px;"></i>`;
+            break;
+          case "炒麵":
+            insert_icon = `<i class="fa-solid fa-bacon" style="margin-right: 5px;"></i>`;
+            break;
+          default:
+            insert_icon = `<i class="fa-solid fa-bowl-spoon" style="margin-right: 5px;"></i>`
+        }
+        button.innerHTML = `${insert_icon}${menu_type["type"]}`;
         v_tabs_div.append(button);
         index_menu_type++;
       }
