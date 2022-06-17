@@ -453,6 +453,7 @@
         }),
         function() {
           global_order[table_button_selected_id()] = [];
+          document.cookie = `global_order=${JSON.stringify(global_order)};`;
           set_order();
         });
       Swal.fire({
@@ -569,6 +570,11 @@
           "price_editable": global_selected_item["price_editable"],
           "edited": result.value[2],
         });
+        document.cookie = `global_order=${JSON.stringify(global_order)};`;
+        console.log(JSON.parse(document.cookie
+          .split('; ')
+          .find(row => row.startsWith('global_order='))
+          ?.split('=')[1]));
         set_order();
       }
     })
@@ -686,6 +692,11 @@
               }
             }
             global_order[`${table_button_selected}`] = tmp_order_list;
+            document.cookie = `global_order=${JSON.stringify(global_order)};`;
+            console.log(JSON.parse(document.cookie
+              .split('; ')
+              .find(row => row.startsWith('global_order='))
+              ?.split('=')[1]));
             set_order();
           }
           if (result.isDenied) {
@@ -696,6 +707,11 @@
               }
             }
             global_order[table_button_selected_id()] = tmp_order_list;
+            document.cookie = `global_order=${JSON.stringify(global_order)};`;
+            console.log(JSON.parse(document.cookie
+              .split('; ')
+              .find(row => row.startsWith('global_order='))
+              ?.split('=')[1]));
             set_order();
           }
         });
@@ -861,6 +877,7 @@
       function(data) {
         const json_data = JSON.parse(data);
         global_table = json_data;
+
         for (const [index, table] of json_data.entries()) {
           let button = document.createElement("button");
           if (index === 0) {
@@ -876,7 +893,17 @@
 
           global_order[table["uuid"]] = [];
         }
+        if (document.cookie.indexOf('global_order=')) {
+          global_order = JSON.parse(document.cookie
+            .split('; ')
+            .find(row => row.startsWith('global_order='))
+            ?.split('=')[1]);
+          set_order();
+        } else {
+          document.cookie = `global_order=${JSON.stringify(global_order)};`;
+        }
       });
+
     $.post("/API/remarks/get_remarks.php",
       function(data) {
         const json_data = JSON.parse(data);
