@@ -545,7 +545,7 @@
             insert_icon = `<i class="fa-solid fa-bacon" style="margin-right: 5px;"></i>`;
             break;
           default:
-            insert_icon = `<i class="fa-solid fa-bowl-spoon" style="margin-right: 5px;"></i>`
+            insert_icon = `<i class="fa-solid fa-stroopwafel" style="margin-right: 5px;"></i>`
         }
         button.innerHTML = `${insert_icon}${menu_type["type"]}`;
         v_tabs_div.append(button);
