@@ -1,12 +1,13 @@
 <?php
 require_once('../../vendor/autoload.php');
+
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 use Mike42\Escpos\Printer;
 
 // initialize printer with font size options
 $connector = new NetworkPrintConnector("192.168.11.100", 9100);
 $printer = new Printer($connector);
-$printer -> setTextSize(3,3);
+$printer->setTextSize(2, 2);
 /**
  * Get the current order log 
  */
@@ -20,6 +21,13 @@ date_default_timezone_get();
 $date = date("Y-m-d H:i:s");
 $payment_total = $data["payment"];
 $table_uuid = $data["table_uuid"];
+// print table name
+$table_name = '';
+$table_name_query = mysqli_query($db_link, "SELECT `A01N02CV0255` FROM `a01` WHERE `A01I01XA` = '$table_uuid'");
+$table_name_result = mysqli_fetch_row($table_name_query)[0];
+$printer->textChinese("桌號$table_name_result\n");
+$printer->feed(3);
+
 
 // find if b01 has any available records to place under, otherwise use a new UUID
 $is_table_in_use_query = mysqli_query($db_link, "SELECT * FROM `b01` WHERE `B01I04XA` = '$table_uuid' AND `B01N04IT` = '0'");
@@ -36,7 +44,7 @@ if (mysqli_num_rows($is_table_in_use_query) === 0) {
     $result = $result && mysqli_query($db_link, "UPDATE `b01` SET `B01N03MM`='$current_amount' WHERE `B01I04XA` = '$table_uuid' AND `B01N04IT` = '0'");
 
     // set the uuid of b01 to be placed in b02
-    $uuid = $table_in_use[0];  
+    $uuid = $table_in_use[0];
 }
 
 // insert into b02 and print
@@ -53,14 +61,14 @@ foreach ($order_list as $order_item) {
             $item_remarks = $item_remarks . ',';
         }
     }
-    $printer -> textChinese("$item_name x$item_quantity\n");
-    $printer -> textChinese("$item_remarks\n");
+    $printer->textChinese("$item_name x $item_quantity\n");
+    $printer->textChinese("$item_remarks\n");
+    $printer->feed(1);
     $result = $result && mysqli_query($db_link, "INSERT INTO `b02`(`B02I01XA`, `B02I02XA`, `B02N03CV0255`, `B02N04MM`, `B02N05CV0255`, `B02N06CV0255`) VALUES ('$item_uuid','$uuid','$item_name','$item_price','$item_remarks', '$item_quantity')");
-    
 }
 
-$printer -> feed(3);
-$printer -> cut();
-$printer -> close();
+$printer->feed(3);
+$printer->cut();
+$printer->close();
 
 echo $result;
