@@ -119,6 +119,14 @@
         align-items: center;
     }
 
+    div#btn_checkout {
+        width: 5rem;
+        height: 5rem;
+        display: grid;
+        justify-content: center;
+        align-content: center;
+    }
+
     div.div_item {
         display: grid;
         grid-template-columns: 1fr 1fr 6rem;
