@@ -211,7 +211,7 @@
       grid-template-columns: 1fr 2fr 1fr;
     }
 
-    div#col_tables{
+    div#col_tables {
       margin-top: .5rem;
     }
 
@@ -770,7 +770,7 @@
         '</div>' +
         '<div style="display: grid; grid-template-columns: 20% auto;">' +
         '<label style="color: white; align-self: center; font-size: 2rem;" for="swal-input2">價錢</label>' +
-        '<input id="swal-input2" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;">' +
+        '<input id="swal-input2" type="number" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">' +
         '</div>' +
         '</div>',
       showCancelButton: true,
@@ -780,12 +780,16 @@
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       preConfirm: function() {
+        let set_price = 0;
+        if ($('#swal-input2').val()) {
+          set_price = $('#swal-input2').val();
+        }
         return new Promise(function(resolve) {
           resolve([
             $('#swal-input1').val(),
-            $('#swal-input2').val()
+            set_price
           ])
-        })
+        });
       },
     }).then(function(result) {
       if (result.isConfirmed) {
@@ -860,7 +864,7 @@
           '</div>' +
           '<div style="display: grid; grid-template-columns: 20% auto;">' +
           '<label style="color: white; align-self: center; font-size: 2rem;" for="swal-input2">價錢</label>' +
-          `<input id="swal-input2" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;" value="${price_selected}">` +
+          `<input id="swal-input2" type="number" class="swal2-input" style="width: 90%; margin: 0; align-self: center; color: white;" value="${price_selected}" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">` +
           '</div>' +
           '</div>',
         showCancelButton: true,
@@ -870,12 +874,16 @@
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         preConfirm: function() {
+          let set_price = 0;
+          if ($('#swal-input2').val()) {
+            set_price = $('#swal-input2').val();
+          }
           return new Promise(function(resolve) {
             resolve([
               $('#swal-input1').val(),
-              $('#swal-input2').val()
+              set_price
             ])
-          })
+          });
         },
       }).then(function(result) {
         if (result.isConfirmed) {

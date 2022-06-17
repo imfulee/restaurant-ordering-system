@@ -509,9 +509,7 @@
       input_edit_price.id = "input-1-price";
       input_edit_price.setAttribute("min", "0")
       input_edit_price.setAttribute("value", global_selected_item["price"]);
-      input_edit_price.oninput = function() {
-        this.value = this.value >= 0 ? this.value : 0;
-      }
+      input_edit_price.setAttribute("oninput", "this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null");
       div_edit_price.append(label_edit_price);
       div_edit_price.append(input_edit_price);
     }
@@ -521,7 +519,7 @@
       html: `
           <div style="margin-bottom: 10px;">
             <button class="add-on" onclick="chgNum(1,'del')"><i class="fas fa-minus"></i></button>
-            <input class="span3 text-center" id="appendedPrependedInput1" type="number" value="1" style="width: 122px;border-radius: 5px;background-color: #ffffff;color: #106a8e;"/>
+            <input class="span3 text-center" id="appendedPrependedInput1" type="number" value="1" style="width: 122px;border-radius: 5px;background-color: #ffffff;color: #106a8e;" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
             <button class="add-on" onclick="chgNum(1,'add')"><i class="fas fa-plus"></i></button>
           </div>` + outer_div.outerHTML + div_edit_price.outerHTML,
       showCancelButton: true,
@@ -538,7 +536,9 @@
           edited_price_alertadd = false;
         if (document.getElementById("input-1-price")) {
           edited_price_alertadd = true;
-          edited_price = parseInt(document.getElementById("input-1-price").value);
+          if (document.getElementById("input-1-price").value) {
+            edited_price = parseInt(document.getElementById("input-1-price").value);
+          }
         }
         return new Promise(function(resolve) {
           resolve([
@@ -618,6 +618,7 @@
           input_edit_price.setAttribute("min", "0")
           input_edit_price.setAttribute("value", order["unit_price"]);
           input_edit_price.setAttribute("autocapitalize", "none");
+          input_edit_price.setAttribute("oninput", "this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null");
           div_edit_price.append(label_edit_price);
           div_edit_price.append(input_edit_price);
         }
@@ -627,7 +628,7 @@
           html: `
           <div style="margin-bottom: 10px;">
             <button class="add-on" onclick="chgNum(1,'del')"><i class="fas fa-minus"></i></button>
-            <input class="span3 text-center" id="appendedPrependedInput1" disabled="disabled" type="text" value="${order["quantity"]}" style="width: 122px;border-radius: 5px;background-color: #ffffff;color: #106a8e;"/>
+            <input class="span3 text-center" id="appendedPrependedInput1" disabled="disabled" type="text" value="${order["quantity"]}" style="width: 122px;border-radius: 5px;background-color: #ffffff;color: #106a8e;" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
             <button class="add-on" onclick="chgNum(1,'add')"><i class="fas fa-plus"></i></button>
           </div>` + outer_div.outerHTML + div_edit_price.outerHTML,
           showCancelButton: true,
@@ -643,8 +644,11 @@
               }
             }
             let new_unit_price = order["unit_price"];
+            let edited_price = 0;
             if (document.getElementById("input-0-price")) {
-              new_unit_price = parseInt(document.getElementById("input-0-price").value);
+              if (document.getElementById("input-0-price").value) {
+                edited_price = parseInt(document.getElementById("input-0-price").value);
+              }
             }
             return new Promise(function(resolve) {
               resolve([
