@@ -58,6 +58,18 @@
         background-color: white;
     }
 
+    .swal2-popup.swal2-modal.swal2-show {
+        background-color: #007048;
+    }
+
+    .swal2-title {
+        font-size: 3rem;
+    }
+
+    .swal2-cancel.swal2-styled.swal2-default-outline {
+        color: #007048;
+    }
+
     body {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -76,7 +88,7 @@
         color: #007048;
     }
 
-    div#btn_control_right{
+    div#btn_control_right {
         display: flex;
         justify-content: end;
         gap: 1rem;
@@ -109,23 +121,49 @@
 
     div.div_item {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 6rem;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "up_left up_right controls"
+            "down_left down_right  controls";
         margin-bottom: 1rem;
+    }
 
+    div.div_item_up_left {
+        display: flex;
+        justify-content: flex-start;
+        grid-area: up_left;
     }
 
     div.div_item_up_right {
         display: flex;
         justify-content: flex-end;
+        grid-area: up_right;
     }
 
     div.div_item_down_left {
         color: rgb(210, 210, 210);
+        grid-area: down_left;
     }
 
     div.div_item_down_right {
         display: flex;
         justify-content: flex-end;
+        grid-area: down_right;
+    }
+
+    div.div_item_ctrl_container {
+        display: grid;
+        grid-area: controls;
+    }
+
+    button.delete_checkout_btn {
+        place-self: center;
+        background-color: #bb2d3b;
+    }
+
+    button.delete_checkout_btn:hover {
+        color: white;
     }
 </style>
 
@@ -190,10 +228,44 @@
                     let div_item_price = document.createElement("div");
                     div_item_price.innerText = `$${checkout_item["item_price"]}`;
                     div_item_price.className = "div_item_down_right";
+                    let div_item_ctrl_container = document.createElement("div");
+                    div_item_ctrl_container.className = "div_item_ctrl_container";
+                    let div_item_delete_button = document.createElement("button");
+                    div_item_delete_button.className = "btn delete_checkout_btn";
+                    div_item_delete_button.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+                    div_item_delete_button.onclick = function() {
+                        Swal.fire({
+                            title: '是否確定刪除？',
+                            showCancelButton: true,
+                            confirmButtonColor: '#bb2d3b',
+                            cancelButtonColor: 'lightgrey',
+                            confirmButtonText: '刪除',
+                            cancelButtonText: "取消"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                console.log(JSON.stringify({
+                                    "uuid": checkout_item["item_uuid"]
+                                }));
+                                $.post(
+                                    "/API/order/set_order_delete_specific.php",
+                                    JSON.stringify({
+                                        "item_uuid": checkout_item["item_uuid"],
+                                        "item_price": checkout_item["item_price"],
+                                        "table_uuid": current_table_uuid
+                                    }),
+                                    function() {
+                                        set_checkout();
+                                    }
+                                );
+                            }
+                        })
+                    }
+                    div_item_ctrl_container.append(div_item_delete_button);
                     div_item.append(div_item_name);
                     div_item.append(div_item_quantity);
                     div_item.append(div_item_remark);
                     div_item.append(div_item_price);
+                    div_item.append(div_item_ctrl_container);
                     document.getElementById("checkout_list").append(div_item);
                 }
             }
