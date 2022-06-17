@@ -1,5 +1,12 @@
 <?php
+require_once('../../vendor/autoload.php');
+use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
+use Mike42\Escpos\Printer;
 
+// initialize printer with font size options
+$connector = new NetworkPrintConnector("192.168.11.100", 9100);
+$printer = new Printer($connector);
+$printer -> setTextSize(3,3);
 /**
  * Get the current order log 
  */
@@ -32,7 +39,7 @@ if (mysqli_num_rows($is_table_in_use_query) === 0) {
     $uuid = $table_in_use[0];  
 }
 
-// insert into b02
+// insert into b02 and print
 $order_list = $data["order_list"];
 foreach ($order_list as $order_item) {
     $item_uuid = $order_item["uuid"];
@@ -46,7 +53,14 @@ foreach ($order_list as $order_item) {
             $item_remarks = $item_remarks . ',';
         }
     }
+    $printer -> textChinese("$item_name x$item_quantity\n");
+    $printer -> textChinese("$item_remarks\n");
     $result = $result && mysqli_query($db_link, "INSERT INTO `b02`(`B02I01XA`, `B02I02XA`, `B02N03CV0255`, `B02N04MM`, `B02N05CV0255`, `B02N06CV0255`) VALUES ('$item_uuid','$uuid','$item_name','$item_price','$item_remarks', '$item_quantity')");
+    
 }
+
+$printer -> feed(3);
+$printer -> cut();
+$printer -> close();
 
 echo $result;
