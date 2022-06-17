@@ -7,7 +7,6 @@ use Mike42\Escpos\Printer;
 // initialize printer with font size options
 $connector = new NetworkPrintConnector("192.168.11.100", 9100);
 $printer = new Printer($connector);
-$printer->setTextSize(2, 2);
 /**
  * Get the current order log 
  */
