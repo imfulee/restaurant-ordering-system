@@ -220,22 +220,22 @@
       justify-content: space-between;
       margin-left: 4rem;
       margin-right: 4rem;
-      height: 50vh;
-      overflow-y: scroll;
+      /* height: 50vh; */
+      /* overflow-y: scroll; */
     }
 
     div#table_add_list>button {
       width: 100%;
     }
 
-    div#v-pills-tabContent {
+    /* div#v-pills-tabContent {
       height: 50vh;
-    }
+    } */
 
-    div#remarks_button_container {
+    /* div#remarks_button_container {
       height: 50vh;
       overflow-y: scroll;
-    }
+    } */
   }
 </style>
 
