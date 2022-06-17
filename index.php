@@ -452,22 +452,24 @@
           "order_list": global_order[table_button_selected_id()]
         }),
         function() {
+          Swal.fire({
+            icon: 'success',
+            title: '出單成功',
+            html: `本次結帳金額為$${payment}`,
+            showConfirmButton: false,
+            timer: 1500,
+            didOpen: () => {
+              document.querySelector(".swal2-success-circular-line-left").style.backgroundColor = "#007048";
+              document.querySelector(".swal2-success-circular-line-right").style.backgroundColor = "#007048";
+              document.querySelector(".swal2-success-fix").style.backgroundColor = "#007048";
+            }
+          });
           global_order[table_button_selected_id()] = [];
           document.cookie = `global_order=${JSON.stringify(global_order)};`;
           set_order();
+          
         });
-      Swal.fire({
-        icon: 'success',
-        title: '出單成功',
-        html: `本次結帳金額為$${payment}`,
-        showConfirmButton: false,
-        timer: 1500,
-        didOpen: () => {
-          document.querySelector(".swal2-success-circular-line-left").style.backgroundColor = "#007048";
-          document.querySelector(".swal2-success-circular-line-right").style.backgroundColor = "#007048";
-          document.querySelector(".swal2-success-fix").style.backgroundColor = "#007048";
-        }
-      });
+
     }
   }
 
