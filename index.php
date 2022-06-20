@@ -455,7 +455,7 @@
           Swal.fire({
             icon: 'success',
             title: '出單成功',
-            html: `本次結帳金額為$${payment}`,
+            html: `金額為$${payment}`,
             showConfirmButton: false,
             timer: 1500,
             didOpen: () => {
@@ -467,7 +467,7 @@
           global_order[table_button_selected_id()] = [];
           document.cookie = `global_order=${JSON.stringify(global_order)};`;
           set_order();
-          
+
         });
 
     }
@@ -573,10 +573,6 @@
           "edited": result.value[2],
         });
         document.cookie = `global_order=${JSON.stringify(global_order)};`;
-        console.log(JSON.parse(document.cookie
-          .split('; ')
-          .find(row => row.startsWith('global_order='))
-          ?.split('=')[1]));
         set_order();
       }
     })
@@ -652,10 +648,9 @@
               }
             }
             let new_unit_price = order["unit_price"];
-            let edited_price = 0;
             if (document.getElementById("input-0-price")) {
               if (document.getElementById("input-0-price").value) {
-                edited_price = parseInt(document.getElementById("input-0-price").value);
+                new_unit_price = parseInt(document.getElementById("input-0-price").value);
               }
             }
             return new Promise(function(resolve) {
@@ -663,7 +658,7 @@
                 $('#appendedPrependedInput1').val(),
                 remark_list,
                 order["uuid"],
-                new_unit_price,
+                new_unit_price
               ])
             })
           },
@@ -695,10 +690,6 @@
             }
             global_order[`${table_button_selected}`] = tmp_order_list;
             document.cookie = `global_order=${JSON.stringify(global_order)};`;
-            console.log(JSON.parse(document.cookie
-              .split('; ')
-              .find(row => row.startsWith('global_order='))
-              ?.split('=')[1]));
             set_order();
           }
           if (result.isDenied) {
@@ -710,10 +701,6 @@
             }
             global_order[table_button_selected_id()] = tmp_order_list;
             document.cookie = `global_order=${JSON.stringify(global_order)};`;
-            console.log(JSON.parse(document.cookie
-              .split('; ')
-              .find(row => row.startsWith('global_order='))
-              ?.split('=')[1]));
             set_order();
           }
         });
@@ -895,11 +882,8 @@
 
           global_order[table["uuid"]] = [];
         }
-        if (document.cookie.indexOf('global_order=')) {
-          global_order = JSON.parse(document.cookie
-            .split('; ')
-            .find(row => row.startsWith('global_order='))
-            ?.split('=')[1]);
+        if (document.cookie.indexOf('global_order=') >= 0) {
+          global_order = JSON.parse(document.cookie.split('; ').find(row => row.startsWith('global_order='))?.split('=')[1]);
           set_order();
         } else {
           document.cookie = `global_order=${JSON.stringify(global_order)};`;
