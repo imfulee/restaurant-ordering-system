@@ -17,7 +17,14 @@
     <script src="js/sweetalert2.all.js"></script>
     <script src="js/sweetalert2.js"></script>
     <link rel="stylesheet" href="css/sweetalert2.css">
-    <title>Zulite</title>
+
+    <!-- favicon  -->
+    <link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="static/favicon/site.webmanifest">
+
+    <title>明煜小吃部</title>
 </head>
 <style>
     body {
@@ -254,7 +261,7 @@
                             swal_grid.className = "swal_grid";
                             let swal_grid_is_paying = document.createElement("div");
                             swal_grid_is_paying.id = "swal_grid_is_paying";
-                            swal_grid_is_paying.innerText = "繳付金額";
+                            swal_grid_is_paying.innerText = "實收金額";
                             let swal_grid_is_paying_amount = document.createElement("input");
                             swal_grid_is_paying_amount.id = "swal_grid_is_paying_amount";
                             swal_grid_is_paying_amount.type = "number";
@@ -263,7 +270,7 @@
                             swal_grid.append(swal_grid_is_paying);
                             swal_grid.append(swal_grid_is_paying_amount);
                             swal_grid.insertAdjacentHTML('beforeend', `<div id="swal_grid_need_pay">結帳金額</div><div id="swal_grid_need_pay_amount">$${checkout_record["total_charge"]}</div>`);
-                            swal_grid.insertAdjacentHTML('beforeend', `<div id="swal_grid_change">結帳金額</div><div id="swal_grid_change_amount">$0</div>`);
+                            swal_grid.insertAdjacentHTML('beforeend', `<div id="swal_grid_change">找錢金額</div><div id="swal_grid_change_amount">$0</div>`);
                             Swal.fire({
                                 title: '結帳資訊',
                                 html: swal_grid.outerHTML,

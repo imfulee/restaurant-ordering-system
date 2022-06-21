@@ -17,7 +17,13 @@
   <script src="js/sweetalert2.all.js"></script>
   <script src="js/sweetalert2.js"></script>
   <link rel="stylesheet" href="css/sweetalert2.css">
-  <title>Zulite</title>
+  <!-- favicon  -->
+  <link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+  <link rel="manifest" href="static/favicon/site.webmanifest">
+
+  <title>明煜小吃部</title>
 </head>
 <style>
   body {
