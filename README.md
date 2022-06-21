@@ -22,3 +22,5 @@ composer require mike42/escpos-php
 ```php
 $str = iconv("UTF-8", "BIG5", $str);
 ```
+
+但如果以上的功能不能用似乎是每個打印機的設定都不一樣所以我就沒辦法都 cover 了
