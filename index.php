@@ -715,7 +715,7 @@
       }
 
       let div_upper = document.createElement("div");
-      div_upper.style = "display: grid;grid-template-columns: 50% 50%;";
+      div_upper.style = "display: grid;grid-template-columns: 70% 30%;";
       let div_item_name = document.createElement("div");
       div_item_name.innerText = order["item_name"];
       let div_multiplier = document.createElement("div");
@@ -723,7 +723,7 @@
       div_multiplier.style = "justify-self: end";
 
       let div_lower = document.createElement("div");
-      div_lower.style = "display: grid;grid-template-columns: 50% 50%;";
+      div_lower.style = "display: grid;grid-template-columns: 70% 30%;";
       let div_remarks = document.createElement("div");
       div_remarks.style = "color: #d2d2d2";
       let concat_remark_str = '';
