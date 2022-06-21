@@ -119,6 +119,47 @@
 
     }
   }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  form#download_report {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  form#download_report input[type="date"] {
+    width: 15rem;
+  }
+
+  div#paid_record_checkbox_container.paid {
+    background-color: #007048;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+  }
+
+  div#paid_record_checkbox_container.not_paid {
+    background-color: #dd3333;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+  }
+
+  label#paid_record_switch {
+    white-space: nowrap;
+  }
+
+  input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+  }
+
+  input[type="checkbox"]:checked+.button {
+    background: #ebdcc3;
+    color: #007048;
+  }
 </style>
 
 <body>
@@ -140,10 +181,17 @@
     <div id="row_time">
       選擇日期：
       <form method="post" id="download_report" action="/API/order/get_order_file.php">
-        <input id="input_start_date" name="start_date" type="date" style="border-radius: 5px;border-color: aliceblue;" onchange="set_time()" value="<?php echo date('Y-m-d'); ?>">
-        ---
-        <input id="input_end_date" name="end_date" type="date" style="border-radius: 5px;border-color: aliceblue;" onchange="set_time()" value="<?php echo date('Y-m-d'); ?>">
-        <input type="hidden">
+        <div id="date_selector">
+          <input id="input_start_date" name="start_date" type="date" style="border-radius: 5px;border-color: aliceblue;" onchange="set_time()" value="<?php echo date('Y-m-d'); ?>">
+          -
+          <input id="input_end_date" name="end_date" type="date" style="border-radius: 5px;border-color: aliceblue;" onchange="set_time()" value="<?php echo date('Y-m-d'); ?>">
+        </div>
+        <div id="paid_record_checkbox_container" class="paid">
+          <label for="paid_records_checkbox" id="paid_record_switch" onclick="switch_order_type(this)">
+            已經結賬
+          </label>
+          <input type="checkbox" name="paid_records" id="paid_records_checkbox" class="round button" checked="checked">
+        </div>
       </form>
     </div>
   </div>
@@ -169,12 +217,6 @@
     <div class="modal-content" style="background-color: #007048;color: white;">
       <div class="modal-body">
         <div style="margin-bottom: 10px;">下載日期：<span id="span_date_modal"></span></div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            細項
-          </label>
-        </div>
       </div>
       <div class="modal-footer" style="border-top: #007048;">
         <button type="button" class="btn" style="background-color: #ebdcc3;color: #007048;" data-bs-dismiss="modal">關閉</button>
@@ -185,6 +227,19 @@
 </div>
 
 <script>
+  function switch_order_type(e) {
+    if (e.innerText === '已經結賬') {
+      e.innerText = '還未結賬';
+      document.getElementById("paid_record_checkbox_container").className = "not_paid";
+      document.getElementById("paid_records_checkbox").checked = false;
+    } else {
+      e.innerText = '已經結賬';
+      document.getElementById("paid_record_checkbox_container").className = "paid";
+      document.getElementById("paid_records_checkbox").checked = true;
+    }
+    set_orders();
+  }
+
   function update_modal_date() {
     document.getElementById("span_date_modal").innerText = '';
     const start_date = document.getElementById("input_start_date").value;
@@ -235,12 +290,13 @@
     let tbody_order = document.getElementById("tbody_order");
     let start_date = document.getElementById("input_start_date").value;
     let end_date = document.getElementById("input_end_date").value;
-
+    let order_paid = document.getElementById("paid_records_checkbox").checked;
     // set the orders
     $.post("/API/order/get_order.php",
       JSON.stringify({
         start_date,
-        end_date
+        end_date,
+        order_paid
       }),
       function(data) {
         tbody_order.innerHTML = '';

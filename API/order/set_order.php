@@ -57,19 +57,21 @@ foreach ($order_list as $order_item) {
     $item_remarks = $item_remarks_chi = '';
     foreach ($order_item["item_remarks"] as $key => $value) {
         $item_remarks = $item_remarks . $value["remark"];
+        $item_remarks_chi = $item_remarks_chi . $value["remark"];
         if ($key !== count($order_item["item_remarks"]) - 1) {
+            $item_remarks = $item_remarks . ',';
             $item_remarks_chi = $item_remarks_chi . '，';
         }
     }
     $printer->textChinese($item_name);
-    for($space = 0 ; $space < 10 - mb_strlen($item_name, "UTF-8") ; $space++) {
+    for($space = 0 ; $space < 9 - mb_strlen($item_name, "UTF-8") ; $space++) {
 		$printer->textChinese("  ");
 	}
     $printer->textChinese("x" . $item_quantity . "\n");
     if ($item_remarks !== '') {
-        $printer->textChinese("$item_remarks");
+        $printer->textChinese("$item_remarks_chi");
     }
-    for($space = 0 ; $space < 10 - mb_strlen($item_remarks, "UTF-8") ; $space++) {
+    for($space = 0 ; $space < 9 - mb_strlen($item_remarks_chi, "UTF-8") ; $space++) {
 		$printer->textChinese("  ");
 	}
     $printer->textChinese("$" . $item_price . "\n");
