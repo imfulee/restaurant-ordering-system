@@ -162,6 +162,8 @@
 
     div.swal_grid input {
         width: 100%;
+        background-color: white;
+        color: black;
     }
 
     input#swal_grid_is_paying_amount {
