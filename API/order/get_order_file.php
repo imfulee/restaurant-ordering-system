@@ -32,11 +32,11 @@ if (!empty($logs)) {
     }
 }
 fclose($file);
+ob_end_clean();
 header("Content-Description: File Transfer");
 header("Content-Disposition: attachment; filename=" . $filename);
 header("Content-Transfer-Encoding: binary");
 header("Content-Type: application/csv; ");
-ob_end_clean();
 readfile($filename);
 unlink($filename);
 exit();
