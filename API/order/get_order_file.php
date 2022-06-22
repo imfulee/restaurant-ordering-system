@@ -3,7 +3,7 @@
 require_once("../db_config.php");
 
 $date_condition = '';
-if ($_POST["start_date"] !== "" && $_POST["end_date"] !== "") {
+if (isset($_POST["start_date"]) && isset($_POST["end_date"]) && $_POST["start_date"] !== "" && $_POST["end_date"] !== "") {
     $start_date = $_POST["start_date"];
     $end_date = $_POST["end_date"];
     $date_condition = "`b01`.`B01D02TD` BETWEEN '$start_date 00:00:00' AND '$end_date 23:59:59' AND ";
