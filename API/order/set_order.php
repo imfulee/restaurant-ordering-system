@@ -7,7 +7,7 @@ use Mike42\Escpos\Printer;
 // initialize printer with font size options
 $connector = new NetworkPrintConnector("192.168.11.100", 9100);
 $printer = new Printer($connector);
-$printer->setTextSize(2,2);
+$printer->setTextSize(2, 2);
 /**
  * Get the current order log 
  */
@@ -64,24 +64,25 @@ foreach ($order_list as $order_item) {
         }
     }
     $printer->textChinese($item_name);
-    for($space = 0 ; $space < 9 - mb_strlen($item_name, "UTF-8") ; $space++) {
-		$printer->textChinese("  ");
-	}
+    for ($space = 0; $space < 9 - mb_strlen($item_name, "UTF-8"); $space++) {
+        $printer->textChinese("  ");
+    }
     $printer->textChinese("x" . $item_quantity . "\n");
     if ($item_remarks !== '') {
         $printer->textChinese("$item_remarks_chi");
     }
-    for($space = 0 ; $space < 9 - mb_strlen($item_remarks_chi, "UTF-8") ; $space++) {
-		$printer->textChinese("  ");
-	}
-    $printer->textChinese("$" . $item_price . "\n");
-    
+    for ($space = 0; $space < 9 - mb_strlen($item_remarks_chi, "UTF-8"); $space++) {
+        $printer->textChinese("  ");
+    }
+    $printer->textChinese("$" . number_format($item_price, 0, '.', ',') . "\n");
+
     $result = $result && mysqli_query($db_link, "INSERT INTO `b02`(`B02I01XA`, `B02I02XA`, `B02N03CV0255`, `B02N04MM`, `B02N05CV0255`, `B02N06CV0255`) VALUES ('$item_uuid','$uuid','$item_name','$item_price','$item_remarks', '$item_quantity')");
 }
 
+$payment_str = number_format($payment_total, 0, '.', ',');
 $printer->textChinese("------------------------\n");
-$printer->textChinese("總價：$$payment_total");
-$printer->feed(2);
+$printer->textChinese("總價：$$payment_str");
+$printer->feed(1);
 $printer->cut();
 $printer->close();
 
