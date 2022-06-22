@@ -104,6 +104,15 @@
     color: white
   }
 
+  .row_details {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+  }
+
+  .detail_item_price {
+    text-align: right;
+  }
+
   @media (orientation: landscape) {
     div#row_title {
       display: grid;
@@ -187,10 +196,10 @@
           <input id="input_end_date" name="end_date" type="date" style="border-radius: 5px;border-color: aliceblue;" onchange="set_time()" value="<?php echo date('Y-m-d'); ?>">
         </div>
         <div id="paid_record_checkbox_container" class="paid">
-          <label for="paid_records_checkbox" id="paid_record_switch" onclick="switch_order_type(this)">
+          <label for="paid_records_checkbox" id="paid_record_switch">
             已經結賬
           </label>
-          <input type="checkbox" name="paid_records" id="paid_records_checkbox" class="round button" checked="checked">
+          <input type="checkbox" name="paid_records" id="paid_records_checkbox" class="round button" checked="true" onclick="switch_order_type()">
         </div>
       </form>
     </div>
@@ -227,15 +236,13 @@
 </div>
 
 <script>
-  function switch_order_type(e) {
-    if (e.innerText === '已經結賬') {
-      e.innerText = '還未結賬';
+  function switch_order_type() {
+    if (document.getElementById("paid_record_switch").innerText === '已經結賬') {
+      document.getElementById("paid_record_switch").innerText = '還未結賬';
       document.getElementById("paid_record_checkbox_container").className = "not_paid";
-      document.getElementById("paid_records_checkbox").checked = false;
     } else {
-      e.innerText = '已經結賬';
+      document.getElementById("paid_record_switch").innerText = '已經結賬';
       document.getElementById("paid_record_checkbox_container").className = "paid";
-      document.getElementById("paid_records_checkbox").checked = true;
     }
     set_orders();
   }
@@ -326,36 +333,25 @@
           div_card.className = "card card-body";
           div_card.style = "background-color: #007048;border-color: #007048;";
           let div_class_row = document.createElement("div");
-          div_class_row.className = "row";
-
-          let div_col5 = document.createElement("div");
-          div_col5.className = "col-5";
-          let div_col3 = document.createElement("div");
-          div_col3.className = "col-3";
-          let div_col4 = document.createElement("div");
-          div_col4.className = "col-4";
-          div_col4.style = "text-align: end;";
+          div_class_row.className = "row_details";
 
           for (const item of order["order_items"]) {
             let div_item_name = document.createElement("div");
-            div_item_name.style = "margin-bottom: 5px;";
             div_item_name.innerHTML = item["item_name"];
-            div_col5.append(div_item_name);
+            div_item_name.className = "detail_item_name";
+            div_class_row.append(div_item_name);
 
             let div_quantity = document.createElement("div");
-            div_quantity.style = "margin-bottom: 5px;";
             div_quantity.innerHTML = `x${item["quantity"]}`;
-            div_col3.append(div_quantity);
+            div_quantity.className = "detail_quantity";
+            div_class_row.append(div_quantity);
 
             let div_item_price = document.createElement("div");
-            div_item_price.style = "margin-bottom: 5px;";
             div_item_price.innerHTML = `$${item["item_price"]}`;
-            div_col4.append(div_item_price);
+            div_item_price.className = "detail_item_price";
+            div_class_row.append(div_item_price);
           }
 
-          div_class_row.append(div_col5);
-          div_class_row.append(div_col3);
-          div_class_row.append(div_col4);
           div_card.append(div_class_row);
           div_details.append(div_card);
 
