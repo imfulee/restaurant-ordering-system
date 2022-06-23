@@ -264,7 +264,7 @@
     div#order_list_background {
       color: white;
       border: 2px solid #007048;
-      height: 70vh;
+      height: 80vh;
       border-radius: 15px;
       box-shadow: 2px 2px 8px 2px #579982;
       padding: 30px 30px;
@@ -302,7 +302,7 @@
     div#v-pills-tab {
       display: grid;
       row-gap: 1em;
-      max-height: 70vh;
+      max-height: 80vh;
       overflow-y: scroll;
     }
 
@@ -311,7 +311,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1em;
       overflow-y: scroll;
-      max-height: 50vh;
+      max-height: 60vh;
     }
   }
 
@@ -320,13 +320,16 @@
       color: white;
       border: 2px solid #007048;
       height: 36vh;
-      border-radius: 15px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
       box-shadow: 2px 2px 8px 2px #579982;
       padding: 30px 30px;
       background-color: #007048;
       display: grid;
       grid-template-rows: 80% 20%;
       justify-self: end;
+      position: absolute;
+      bottom: 0;
     }
 
     div#row_title {
@@ -349,11 +352,12 @@
     }
 
     div#v-pills-tab {
-      display: flex;
+      flex-wrap: nowrap;
       flex-direction: column;
-      gap: 1rem;
-      /* max-height: 45vh; */
-      /* overflow-y: scroll; */
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-height: 50vh;
+      overflow-y: scroll;
     }
 
     div.tab-pane.fade.active.show {
@@ -361,7 +365,7 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 1em;
       overflow-y: scroll;
-      /* height: 40vh; */
+      height: 40vh;
     }
 
     div.tab-pane.fade.active.show button {
@@ -384,7 +388,7 @@
 
   <div class="row" id="row_main">
     <div id="col_ordering_controls">
-      <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       </div>
       <div>
         <div class="nav nav-pills me-3" id="v-pills-tab-type" role="tablist">
