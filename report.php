@@ -198,11 +198,11 @@
   <div class="row" id="row_title" style="margin-top: 15px;">
     <div id="btn_control_left">
       <a href="index.php" type="button" class="btn" title="跳回點餐系統"><i class="fas fa-share-square"></i></a>
-      <a href="setting.php" type="button" class="btn" title="修改"><i class="fas fa-pen"></i></a>
+      <a href="checkout.php" type="button" class="btn btn-xl" title="結帳"><i class="fas fa-hand-holding-usd"></i></a>
     </div>
     <h1 id="h1_pagename" style="text-align: center;color: #007048;">報表</h1>
     <div id="btn_control_right">
-      <a href="checkout.php" type="button" class="btn btn-xl" title="結帳"><i class="fas fa-hand-holding-usd"></i></a>
+      <a href="setting.php" type="button" class="btn" title="修改"><i class="fas fa-pen"></i></a>
       <button type="button" class="btn btn-primary" title="下載" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="update_modal_date()">
         <i class="fas fa-download"></i>
       </button>
