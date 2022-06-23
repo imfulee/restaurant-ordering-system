@@ -113,20 +113,10 @@
     text-align: right;
   }
 
-  @media (orientation: landscape) {
-    div#row_title {
-      display: grid;
-      grid-template-columns: 20% auto 20%;
+  div#row_title {
+    display: grid;
+    grid-template-columns: 20% auto 20%;
 
-    }
-  }
-
-  @media (orientation: portrait) {
-    div#row_title {
-      display: grid;
-      grid-template-columns: 30% auto 30%;
-
-    }
   }
 
   input[type="checkbox"] {
@@ -168,6 +158,39 @@
   input[type="checkbox"]:checked+.button {
     background: #ebdcc3;
     color: #007048;
+  }
+
+  tbody#tbody_order {
+    display: block;
+    max-height: 50vh;
+    overflow-y: scroll;
+  }
+
+  thead,
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    /* even columns width , fix width of table too*/
+  }
+
+  thead {
+    width: 100%
+      /* scrollbar is average 1em/16px width, remove it from thead width */
+  }
+
+  @media (orientation: portrait) {
+    div#row_title {
+      display: grid;
+      grid-template-columns: 30% auto 30%;
+    }
+
+    tbody#tbody_order {
+      display: block;
+      max-height: 70vh;
+      overflow-y: scroll;
+    }
+
   }
 </style>
 
@@ -314,9 +337,11 @@
           let td_date_content = document.createElement("td");
           td_date_content.style = "background-color: rgb(0, 112, 72);";
           td_date_content.innerHTML = `${order["date_time"].split(' ')[0]}`;
+          td_date_content.setAttribute("width", "30%");
 
           let td_price_content = document.createElement("td");
           td_price_content.style = "background-color: rgb(0, 112, 72);";
+          td_price_content.setAttribute("width", "70%");
           let a_order_details = document.createElement("a");
           a_order_details.type = "button";
           a_order_details.setAttribute("data-bs-toggle", "collapse");

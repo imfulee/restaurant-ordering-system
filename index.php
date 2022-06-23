@@ -289,14 +289,14 @@
 
     div#col_ordering_controls {
       display: grid;
-      grid-template-columns: 20% auto;
+      grid-template-columns: 25% auto;
       margin-bottom: 1rem;
     }
 
     div#row_main {
       margin-top: 1rem;
       display: grid;
-      grid-template-columns: 1.5fr 1fr;
+      grid-template-columns: 1.8fr 1fr;
     }
 
     div#v-pills-tab {

@@ -114,6 +114,9 @@
         padding: 1rem;
         border-radius: 0.5rem;
         font-size: 2rem;
+        max-height: 80vh;
+        background-color: #007048;
+        overflow-y: scroll;
     }
 
     p.p_center {

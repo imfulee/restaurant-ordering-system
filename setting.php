@@ -170,6 +170,11 @@
       width: auto;
     }
 
+    div#table_add_list {
+      max-height: 10vh;
+      overflow-y: scroll;
+    }
+
     div#row_title {
       margin-left: 1rem;
       margin-right: 1rem;
@@ -189,15 +194,31 @@
       margin-top: 1rem;
     }
 
+    div#v-pills-tab {
+      max-height: 30vh;
+      overflow-y: scroll;
+      width: 100%;
+    }
+
     div#v-pills-tabContent {
-      margin-left: 4rem;
       display: grid;
       justify-items: center;
+      max-height: 30vh;
+      overflow-y: scroll;
+    }
+
+    div#remarks_button_container {
+      height: 15vh;
       overflow-y: scroll;
     }
   }
 
   @media (orientation: landscape) {
+
+    div#row_main {
+      margin-top: 65px;
+    }
+
     div#row_title {
       margin-left: 2rem;
       margin-right: 2rem;
@@ -210,6 +231,11 @@
       justify-content: space-between;
       margin-left: 4rem;
       margin-right: 4rem;
+    }
+
+    div#table_add_list {
+      max-height: 60vh;
+      overflow-y: scroll;
     }
 
     div#row_main {
@@ -234,14 +260,31 @@
       width: 100%;
     }
 
-    /* div#v-pills-tabContent {
-      height: 50vh;
-    } */
+    div#menu_type_item_list {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
 
-    /* div#remarks_button_container {
-      height: 50vh;
+    div#v-pills-tab {
+      max-height: 60vh;
       overflow-y: scroll;
-    } */
+    }
+
+    div#v-pills-tab button {
+      max-height: 60vh;
+      overflow-y: scroll;
+      height: 4rem;
+    }
+
+    div#v-pills-tabContent {
+      max-height: 60vh;
+      overflow-y: scroll;
+    }
+
+    div#remarks_button_container {
+      max-height: 60vh;
+      overflow-y: scroll;
+    }
   }
 </style>
 
@@ -258,7 +301,7 @@
     </div>
   </div>
 
-  <div id="row_main" style="margin-top: 65px;">
+  <div id="row_main">
     <div id="col_tables">
       <div id="buttons_table">
         <button type="button" class="btn" id="tableDelete" title="刪除" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 0;" onclick="delete_table()"><i class="fas fa-minus"></i></button>
@@ -276,8 +319,8 @@
       <button type="button" class="btn" id="projectAdd" title="新增" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="add_menu_item()"><i class="fas fa-plus"></i></button>
       <button type="button" class="btn" id="projectRevise" title="修改" style="background-color: #007048;color: white;margin-bottom: 10px;margin-left: 17px;" onclick="edit_menu_item()"><i class="fas fa-pen"></i></button>
 
-      <div class="d-flex align-items-start">
-        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-left: 40px;">
+      <div id="menu_type_item_list">
+        <div class="nav nav-pills" id="v-pills-tab" role="tablist">
         </div>
         <div class="tab-content" id="v-pills-tabContent">
         </div>
