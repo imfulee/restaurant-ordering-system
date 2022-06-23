@@ -8,6 +8,7 @@ foreach($data as $action){
         $type = $action["type"];
         $uuid = $action["uuid"];
         $result = mysqli_query($db_link, "INSERT INTO `a04`(`A04I01XA`, `A04N02CV0255`) VALUES ('$uuid','$type')");
+        usleep(1000);
     } else if ($action["action"] == "delete"){
         $uuid = $action["uuid"];
         $result = mysqli_query($db_link, "DELETE FROM `a04` WHERE `A04I01XA` = '$uuid'");

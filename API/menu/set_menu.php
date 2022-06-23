@@ -10,6 +10,7 @@ foreach($data as $action){
         $price = $action["price"];
         $type_uuid = $action["type_uuid"];
         $result = mysqli_query($db_link, "INSERT INTO `a02`(`A02I01XA`, `A02I02XA`, `A02N03CV0255`, `A02N04MM`) VALUES ('$uuid','$type_uuid','$item_name','$price')");
+        usleep(1000);
     } else if ($action["action"] == "delete"){
         $uuid = $action["uuid"];
         $result = mysqli_query($db_link, "DELETE FROM `a02` WHERE `A02I01XA` = '$uuid'");

@@ -11,6 +11,7 @@ foreach($data as $action){
         echo $remark;
         echo $uuid;
         $result = mysqli_query($db_link, "INSERT INTO `a03`(`A03I01XA`, `A03N02CV0255`) VALUES ('$uuid','$remark')");
+        usleep(1000);
     } else if ($action["action"] == "delete"){
         echo "delete\n";
         $uuid = $action["uuid"];
