@@ -452,13 +452,17 @@
 
     if (is_all_unit_price_set) {
       const payment = parseInt(document.getElementById("totalAmount").innerText);
+      let order_json = JSON.stringify({
+        "uuid": _uuid(),
+        "table_uuid": table_button_selected_id(),
+        "payment": payment,
+        "order_list": global_order[table_button_selected_id()]
+      });
+      $.post("/API/order/print_order.php",
+        order_json
+      );
       $.post("/API/order/set_order.php",
-        JSON.stringify({
-          "uuid": _uuid(),
-          "table_uuid": table_button_selected_id(),
-          "payment": payment,
-          "order_list": global_order[table_button_selected_id()]
-        }),
+        order_json,
         function() {
           Swal.fire({
             icon: 'success',
@@ -476,7 +480,8 @@
           document.cookie = `global_order=${JSON.stringify(global_order)};`;
           set_order();
 
-        });
+        }
+      );
 
     }
   }
