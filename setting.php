@@ -220,8 +220,8 @@
     }
 
     div#row_title {
-      margin-left: 2rem;
-      margin-right: 2rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
       display: grid;
       grid-template-columns: 1fr 2fr 1fr;
     }
