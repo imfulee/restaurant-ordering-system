@@ -12,7 +12,7 @@ if(!empty($start_date) || !empty($end_date)){
 }
 
 $orders = array();
-$orders_query = mysqli_query($db_link, "SELECT * FROM `b01` WHERE " . $date_condition . "`B01N05IT` = '$order_paid' ORDER BY `b01`.`B01D02TD` DESC ");
+$orders_query = mysqli_query($db_link, "SELECT * FROM `b01` WHERE " . $date_condition . "`B01N05IT` = '$order_paid' ORDER BY `b01`.`B01D02TD` ASC ");
 while ($row = mysqli_fetch_row($orders_query)) {
     $order_items = array();
     $items_query = mysqli_query($db_link, "SELECT * FROM `b02` WHERE `B02I02XA` = '{$row[0]}'");

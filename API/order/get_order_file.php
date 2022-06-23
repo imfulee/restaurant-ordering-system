@@ -12,7 +12,7 @@ $order_paid = $_POST["paid_records"] ? 1 : 0;
 
 $logs = array();
 
-$logs_query = mysqli_query($db_link, "SELECT `b01`.`B01D02TD`, `b02`.`B02N03CV0255`, `b02`.`B02N04MM`, `b02`.`B02N06CV0255` FROM `b01` RIGHT JOIN `b02` ON `B02I02XA` = `b01`.`B01I01XA` WHERE " . $date_condition . "`B01N05IT` = '{$order_paid}' ORDER BY `b01`.`B01D02TD` DESC");
+$logs_query = mysqli_query($db_link, "SELECT `b01`.`B01D02TD`, `b02`.`B02N03CV0255`, `b02`.`B02N04MM`, `b02`.`B02N06CV0255` FROM `b01` RIGHT JOIN `b02` ON `B02I02XA` = `b01`.`B01I01XA` WHERE " . $date_condition . "`B01N05IT` = '{$order_paid}' ORDER BY `b01`.`B01D02TD` ASC");
 
 
 while ($row = mysqli_fetch_row($logs_query)) {

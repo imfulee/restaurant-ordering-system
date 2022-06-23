@@ -5,7 +5,7 @@ $result = true;
 // get the table uuid
 $checkout_return = [];
 $all_table_uuid_arr = [];
-$all_table_uuid_query = mysqli_query($db_link, "SELECT * FROM `a01`");
+$all_table_uuid_query = mysqli_query($db_link, "SELECT * FROM `a01` ORDER BY `a01`.`A01D03TD` ASC");
 while ($table_row = mysqli_fetch_row($all_table_uuid_query)) {
     $table_uuid = $table_row[0];
     $checkout_item_query = mysqli_query($db_link, "SELECT `B02I01XA`, `B02N03CV0255`, `B02N04MM`, `B02N05CV0255`, `B02N06CV0255`, `B01I01XA`, `B01N03MM` FROM `b02` LEFT JOIN `b01` ON `B02I02XA` = `B01I01XA` WHERE `B01I04XA` = '$table_uuid' AND `B01N05IT` = '0'");
